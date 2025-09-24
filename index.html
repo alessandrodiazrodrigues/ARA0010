@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comportamento Organizacional - Prof. Alessandro Diaz Rodrigues</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .course-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .info-card h3 {
+            color: #87CEEB;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .lesson-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lesson-card:hover {
+            border-color: #FFD700;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .lesson-number {
+            background: #FFD700;
+            color: #333;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .lesson-title {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #87CEEB;
+            font-weight: bold;
+        }
+        
+        .lesson-topics {
+            color: #ccc;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+        
+        .lesson-status {
+            margin-top: 15px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .ready { background: #27ae60; color: white; }
+        .in-progress { background: #f39c12; color: white; }
+        .planned { background: #95a5a6; color: white; }
+        
+        .special-sections {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .special-card {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .special-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>COMPORTAMENTO ORGANIZACIONAL</h1>
+            <p><strong>Prof. Alessandro Diaz Rodrigues</strong></p>
+            <p>Plano Completo Integrado - 12 Aulas (80h)</p>
+            <p>Extensão: Trabalho e Sociedade</p>
+        </div>
+
+        <div class="course-info">
+            <div class="info-card">
+                <h3>📚 Sobre o Curso</h3>
+                <p><strong>Código:</strong> ARA0010</p>
+                <p><strong>Natureza:</strong> Extensão</p>
+                <p><strong>Carga Horária:</strong> 80h (4h semanais)</p>
+                <p><strong>Área:</strong> Tecnologia, Produção e Trabalho</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>🎯 Objetivos</h3>
+                <ul>
+                    <li>Avaliar relação pessoas-organização</li>
+                    <li>Utilizar inteligência emocional</li>
+                    <li>Propor estratégias de comunicação assertiva</li>
+                    <li>Construir espaços éticos e diversos</li>
+                    <li>Liderar equipes de alta performance</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h3>📈 Competências</h3>
+                <p>Comunicação, gestão de equipes, liderança, relacionamento interpessoal, aprendizagem autônoma, planejamento, organização, controle, pensamento sistêmico, resolução de problemas.</p>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin: 40px 0; color: #FFD700; font-size: 2.5em;">AULAS DO CURSO</h2>
+
+        <div class="lessons-grid">
+            <!-- Aula 1 -->
+            <div class="lesson-card" onclick="openLesson('aula01')">
+                <div class="lesson-number">1</div>
+                <div class="lesson-title">Fundamentos do Comportamento Organizacional</div>
+                <div class="lesson-topics">
+                    • O que é Comportamento Organizacional<br>
+                    • Evolução Histórica<br>
+                    • Temas Atuais em CO<br>
+                    • Reflexões Filosóficas Fundamentais
+                </div>
+                <div class="lesson-status ready">✓ PRONTA</div>
+            </div>
+
+            <!-- Aula 2 -->
+            <div class="lesson-card" onclick="openLesson('aula02')">
+                <div class="lesson-number">2</div>
+                <div class="lesson-title">Autoconhecimento, Ética e Valores</div>
+                <div class="lesson-topics">
+                    • Conhece-te a Ti Mesmo<br>
+                    • Razão, Ética e Moral<br>
+                    • Valores Pessoais (8 Passos)<br>
+                    • Mindset do Futuro do Trabalho
+                </div>
+                <div class="lesson-status ready">✓ PRONTA</div>
+            </div>
+
+            <!-- Aula 3 -->
+            <div class="lesson-card" onclick="openLesson('aula03')">
+                <div class="lesson-number">3</div>
+                <div class="lesson-title">Percepção e Processos Perceptivos</div>
+                <div class="lesson-topics">
+                    • Conceito de Percepção<br>
+                    • Fatores que Influenciam<br>
+                    • Teoria da Atribuição<br>
+                    • Aplicações Práticas
+                </div>
+                <div class="lesson-status ready">✓ PRONTA</div>
+            </div>
+
+            <!-- Aula 4 -->
+            <div class="lesson-card" onclick="openLesson('aula04')">
+                <div class="lesson-number">4</div>
+                <div class="lesson-title">Emoções e Humores no Trabalho</div>
+                <div class="lesson-topics">
+                    • Definições: Afeto, Sentimentos, Emoções<br>
+                    • Emoções Básicas vs Humores<br>
+                    • Inteligência Emocional<br>
+                    • Aplicações no Trabalho
+                </div>
+                <div class="lesson-status ready">✓ PRONTA</div>
+            </div>
+
+            <!-- Aula 5 -->
+            <div class="lesson-card" onclick="openLesson('aula05')">
+                <div class="lesson-number">5</div>
+                <div class="lesson-title">Inteligência Emocional e Competências</div>
+                <div class="lesson-topics">
+                    • Daniel Goleman - Famílias de Emoções<br>
+                    • Universalidade das Emoções<br>
+                    • Autoconhecimento e Vulnerabilidade<br>
+                    • Desenvolvimento da IE
+                </div>
+                <div class="lesson-status ready">✓ PRONTA</div>
+            </div>
+
+            <!-- Aula 6 -->
+            <div class="lesson-card" onclick="openLesson('aula06')">
+                <div class="lesson-number">6</div>
+                <div class="lesson-title">Liderança - Teorias e Fundamentos</div>
+                <div class="lesson-topics">
+                    • Importância da Liderança<br>
+                    • Teoria dos Traços<br>
+                    • Teoria dos Estilos<br>
+                    • Teoria Situacional
+                </div>
+                <div class="lesson-status ready">✓ PRONTA</div>
+            </div>
+
+            <!-- Aula 7 -->
+            <div class="lesson-card" onclick="openLesson('aula07')">
+                <div class="lesson-number">7</div>
+                <div class="lesson-title">Liderança Carismática e Transformacional</div>
+                <div class="lesson-topics">
+                    • Liderança Carismática (Max Weber)<br>
+                    • Liderança Transformacional vs Transacional<br>
+                    • Liderança Autêntica<br>
+                    • Liderança Online
+                </div>
+                <div class="lesson-status ready">✓ PRONTA</div>
+            </div>
+
+            <!-- Aula 8 -->
+            <div class="lesson-card" onclick="openLesson('aula08')">
+                <div class="lesson-number">8</div>
+                <div class="lesson-title">Poder e Autoridade nas Organizações</div>
+                <div class="lesson-topics">
+                    • Poder X Liderança<br>
+                    • Os 5 Tipos de Poder<br>
+                    • Autoridade (Weber)<br>
+                    • Impactos do Poder
+                </div>
+                <div class="lesson-status ready">✓ PRONTA</div>
+            </div>
+
+            <!-- Aula 9 -->
+            <div class="lesson-card" onclick="openLesson('aula09')">
+                <div class="lesson-number">9</div>
+                <div class="lesson-title">Grupos no Ambiente Organizacional</div>
+                <div class="lesson-topics">
+                    • Conceito de Grupos<br>
+                    • Tipos de Grupos<br>
+                    • Estágios de Desenvolvimento<br>
+                    • Dinâmica de Grupos
+                </div>
+                <div class="lesson-status ready">✓ PRONTA</div>
+            </div>
+
+            <!-- Aula 10 -->
+            <div class="lesson-card" onclick="openLesson('aula10')">
+                <div class="lesson-number">10</div>
+                <div class="lesson-title">Equipes de Alta Performance</div>
+                <div class="lesson-topics">
+                    • Grupos vs Equipes<br>
+                    • Características das EAP<br>
+                    • Processo de Desenvolvimento<br>
+                    • Fatores de Sucesso
+                </div>
+                <div class="lesson-status ready">✓ PRONTA</div>
+            </div>
+
+            <!-- Aula 11 -->
+            <div class="lesson-card" onclick="openLesson('aula11')">
+                <div class="lesson-number">11</div>
+                <div class="lesson-title">Teorias Motivacionais Fundamentais</div>
+                <div class="lesson-topics">
+                    • Conceitos de Motivação<br>
+                    • Hierarquia de Maslow<br>
+                    • Teoria dos Dois Fatores (Herzberg)<br>
+                    • Exemplos Práticos Atuais
+                </div>
+                <div class="lesson-status in-progress">🔄 EM DESENVOLVIMENTO</div>
+            </div>
+
+            <!-- Aula 12 -->
+            <div class="lesson-card" onclick="openLesson('aula12')">
+                <div class="lesson-number">12</div>
+                <div class="lesson-title">Teorias Motivacionais Aplicadas</div>
+                <div class="lesson-topics">
+                    • Teoria da Expectativa (Vroom)<br>
+                    • Necessidades Adquiridas (McClelland)<br>
+                    • Organizações que Aprendem<br>
+                    • Estratégias Motivacionais
+                </div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
+            </div>
+        </div>
+
+        <div class="special-sections">
+            <div class="special-card" onclick="openSpecial('revisao-sm1')">
+                <h3>📚 REVISÃO SM1</h3>
+                <p>Material completo para primeira avaliação</p>
+                <p><strong>Temas:</strong> Maslow, Comunicação, Feedback, Barreiras, Ética</p>
+            </div>
+            
+            <div class="special-card" onclick="openSpecial('projeto-extensao')">
+                <h3>🌱 PROJETO DE EXTENSÃO</h3>
+                <p>Roteiro completo do projeto extensionista</p>
+                <p><strong>Fases:</strong> Diagnóstico, Planejamento, Execução</p>
+            </div>
+            
+            <div class="special-card" onclick="openSpecial('recursos-extras')">
+                <h3>🎯 RECURSOS EXTRAS</h3>
+                <p>Materiais complementares e ferramentas</p>
+                <p><strong>Conteúdo:</strong> Cases, Vídeos, Exercícios, Bibliografia</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Metodologia:</strong> Aprendizagem por projetos com foco extensionista</p>
+            <p><strong>Público:</strong> Líderes comunitários e estudantes</p>
+            <p><strong>Competências:</strong> Hardskills e Softskills para liderança comunitária</p>
+        </div>
+    </div>
+
+    <script>
+        function openLesson(lessonId) {
+            // Aqui você pode adicionar lógica para abrir cada aula específica
+            alert(`Abrindo ${lessonId}...`);
+            // window.open(`${lessonId}.html`, '_blank');
+        }
+        
+        function openSpecial(specialId) {
+            alert(`Abrindo ${specialId}...`);
+            // window.open(`${specialId}.html`, '_blank');
+        }
+        
+        // Adicionar efeito de hover nos cards
+        document.querySelectorAll('.lesson-card, .special-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
