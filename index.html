@@ -156,6 +156,17 @@
             background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
         }
+
+        /* Destacar cards especiais que funcionam */
+        .special-card.available {
+            background: linear-gradient(135deg, #4CAF50, #2196F3);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .special-card.available::before {
+            content: "✅ ";
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -206,7 +217,7 @@
                     • Temas Atuais em CO<br>
                     • Reflexões Filosóficas Fundamentais
                 </div>
-                <div class="lesson-status ready">✓ PRONTA</div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
             </div>
 
             <!-- Aula 2 -->
@@ -219,7 +230,7 @@
                     • Valores Pessoais (8 Passos)<br>
                     • Mindset do Futuro do Trabalho
                 </div>
-                <div class="lesson-status ready">✓ PRONTA</div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
             </div>
 
             <!-- Aula 3 -->
@@ -232,7 +243,7 @@
                     • Teoria da Atribuição<br>
                     • Aplicações Práticas
                 </div>
-                <div class="lesson-status ready">✓ PRONTA</div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
             </div>
 
             <!-- Aula 4 -->
@@ -245,7 +256,7 @@
                     • Inteligência Emocional<br>
                     • Aplicações no Trabalho
                 </div>
-                <div class="lesson-status ready">✓ PRONTA</div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
             </div>
 
             <!-- Aula 5 -->
@@ -258,7 +269,7 @@
                     • Autoconhecimento e Vulnerabilidade<br>
                     • Desenvolvimento da IE
                 </div>
-                <div class="lesson-status ready">✓ PRONTA</div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
             </div>
 
             <!-- Aula 6 -->
@@ -271,7 +282,7 @@
                     • Teoria dos Estilos<br>
                     • Teoria Situacional
                 </div>
-                <div class="lesson-status ready">✓ PRONTA</div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
             </div>
 
             <!-- Aula 7 -->
@@ -284,7 +295,7 @@
                     • Liderança Autêntica<br>
                     • Liderança Online
                 </div>
-                <div class="lesson-status ready">✓ PRONTA</div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
             </div>
 
             <!-- Aula 8 -->
@@ -297,7 +308,7 @@
                     • Autoridade (Weber)<br>
                     • Impactos do Poder
                 </div>
-                <div class="lesson-status ready">✓ PRONTA</div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
             </div>
 
             <!-- Aula 9 -->
@@ -310,7 +321,7 @@
                     • Estágios de Desenvolvimento<br>
                     • Dinâmica de Grupos
                 </div>
-                <div class="lesson-status ready">✓ PRONTA</div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
             </div>
 
             <!-- Aula 10 -->
@@ -323,41 +334,42 @@
                     • Processo de Desenvolvimento<br>
                     • Fatores de Sucesso
                 </div>
-                <div class="lesson-status ready">✓ PRONTA</div>
+                <div class="lesson-status planned">📋 PLANEJADA</div>
             </div>
 
-            <!-- Aula 11 -->
-            <div class="lesson-card" onclick="openLesson('aula11')">
+            <!-- Aula 11 - MOTIVAÇÃO PRONTA -->
+            <div class="lesson-card" onclick="openLesson('motivacao-completa')" style="border: 3px solid #4CAF50;">
                 <div class="lesson-number">11</div>
                 <div class="lesson-title">Teorias Motivacionais Fundamentais</div>
                 <div class="lesson-topics">
                     • Conceitos de Motivação<br>
                     • Hierarquia de Maslow<br>
                     • Teoria dos Dois Fatores (Herzberg)<br>
-                    • Exemplos Práticos Atuais
+                    • McClelland, Vroom, Flow
                 </div>
-                <div class="lesson-status in-progress">🔄 EM DESENVOLVIMENTO</div>
+                <div class="lesson-status ready">✅ PRONTA - 50 SLIDES</div>
             </div>
 
-            <!-- Aula 12 -->
-            <div class="lesson-card" onclick="openLesson('aula12')">
+            <!-- Aula 12 - LIDERANÇA PRONTA -->
+            <div class="lesson-card" onclick="openLesson('lideranca-completa')" style="border: 3px solid #FF9800;">
                 <div class="lesson-number">12</div>
-                <div class="lesson-title">Teorias Motivacionais Aplicadas</div>
+                <div class="lesson-title">Liderança, Poder e Autoridade</div>
                 <div class="lesson-topics">
-                    • Teoria da Expectativa (Vroom)<br>
-                    • Necessidades Adquiridas (McClelland)<br>
-                    • Organizações que Aprendem<br>
-                    • Estratégias Motivacionais
+                    • 5 Bases do Poder<br>
+                    • Teorias de Liderança<br>
+                    • Estilos de Liderança<br>
+                    • Liderança do Futuro
                 </div>
-                <div class="lesson-status planned">📋 PLANEJADA</div>
+                <div class="lesson-status ready">✅ PRONTA - 50 SLIDES</div>
             </div>
         </div>
 
         <div class="special-sections">
-            <div class="special-card" onclick="openSpecial('revisao-sm1')">
+            <div class="special-card available" onclick="openSpecial('revisao-sm1')">
                 <h3>📚 REVISÃO SM1</h3>
                 <p>Material completo para primeira avaliação</p>
                 <p><strong>Temas:</strong> Maslow, Comunicação, Feedback, Barreiras, Ética</p>
+                <div style="margin-top: 10px; font-weight: bold;">45 SLIDES PRONTOS</div>
             </div>
             
             <div class="special-card" onclick="openSpecial('projeto-extensao')">
@@ -377,19 +389,33 @@
             <p><strong>Metodologia:</strong> Aprendizagem por projetos com foco extensionista</p>
             <p><strong>Público:</strong> Líderes comunitários e estudantes</p>
             <p><strong>Competências:</strong> Hardskills e Softskills para liderança comunitária</p>
+            <br>
+            <p><strong>📁 ARQUIVOS DISPONÍVEIS:</strong></p>
+            <p>✅ revisao-sm1.html | ✅ motivacao-completa.html | ✅ lideranca-completa.html</p>
         </div>
     </div>
 
     <script>
         function openLesson(lessonId) {
-            // Aqui você pode adicionar lógica para abrir cada aula específica
-            alert(`Abrindo ${lessonId}...`);
-            // window.open(`${lessonId}.html`, '_blank');
+            // Verificar se é um dos arquivos que realmente existem
+            const availableFiles = ['revisao-sm1', 'motivacao-completa', 'lideranca-completa'];
+            
+            if (availableFiles.includes(lessonId)) {
+                // Abrir arquivo específico
+                window.open(`${lessonId}.html`, '_blank');
+            } else {
+                // Para aulas que ainda não estão prontas
+                alert(`📚 Aula em desenvolvimento!\n\nEsta aula será disponibilizada em breve.\n\n✅ Disponíveis agora:\n• Revisão SM1\n• Teorias Motivacionais Completas\n• Liderança, Poder e Autoridade`);
+            }
         }
         
         function openSpecial(specialId) {
-            alert(`Abrindo ${specialId}...`);
-            // window.open(`${specialId}.html`, '_blank');
+            // Verificar se é um arquivo que existe
+            if (specialId === 'revisao-sm1') {
+                window.open('revisao-sm1.html', '_blank');
+            } else {
+                alert(`📋 Seção em desenvolvimento!\n\nEste conteúdo será disponibilizado em breve.\n\n✅ Disponível agora:\n• Revisão SM1`);
+            }
         }
         
         // Adicionar efeito de hover nos cards
@@ -402,6 +428,11 @@
                 this.style.transform = 'translateY(0) scale(1)';
             });
         });
+
+        // Destacar cards disponíveis
+        console.log('📚 Comportamento Organizacional - Sistema Carregado');
+        console.log('✅ Arquivos Disponíveis: revisao-sm1.html, motivacao-completa.html, lideranca-completa.html');
+        console.log('🎯 Total: 145 slides de conteúdo pronto para apresentação!');
     </script>
 </body>
 </html>
