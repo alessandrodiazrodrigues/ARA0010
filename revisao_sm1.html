@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão SM1 - Comportamento Organizacional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: #1a1a2e;
+            color: #ffffff;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .slide {
+            display: none;
+            padding: 30px;
+            height: 100vh;
+            overflow-y: auto;
+            text-align: center;
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+        }
+        
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .slide h1 {
+            font-size: 4em;
+            margin-bottom: 30px;
+            color: #ffd700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            font-weight: bold;
+        }
+        
+        .slide h2 {
+            font-size: 3.2em;
+            margin-bottom: 25px;
+            color: #00bcd4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-weight: bold;
+        }
+        
+        .slide h3 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #4caf50;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-weight: bold;
+        }
+        
+        .slide h4 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #ff9800;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            font-weight: bold;
+        }
+        
+        .slide p, .slide li {
+            font-size: 1.8em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: left;
+            max-width: 1000px;
+            color: #f0f0f0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            font-weight: 500;
+        }
+        
+        .slide ul, .slide ol {
+            text-align: left;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-left: 30px;
+        }
+        
+        .theory-box {
+            background: rgba(0, 188, 212, 0.15);
+            border: 3px solid #00bcd4;
+            padding: 30px;
+            margin: 25px auto;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 1000px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .example-box {
+            background: rgba(76, 175, 80, 0.15);
+            border: 3px solid #4caf50;
+            border-left: 8px solid #4caf50;
+            padding: 25px;
+            margin: 25px auto;
+            border-radius: 12px;
+            text-align: left;
+            max-width: 1000px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .warning-box {
+            background: rgba(255, 152, 0, 0.15);
+            border: 3px solid #ff9800;
+            padding: 25px;
+            margin: 25px auto;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 1000px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 2px solid #00bcd4;
+        }
+        
+        .controls button {
+            background: #00bcd4;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            margin: 0 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .controls button:hover {
+            background: #0097a7;
+            transform: scale(1.05);
+        }
+        
+        .slide-counter {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 1000;
+            font-size: 20px;
+            font-weight: bold;
+            border: 2px solid #ffd700;
+            color: #ffd700;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 12px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            text-align: left;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s ease;
+            font-size: 1.6em;
+            font-weight: 500;
+        }
+        
+        .quiz-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffd700;
+            transform: scale(1.02);
+        }
+        
+        .correct {
+            background: rgba(76, 175, 80, 0.3) !important;
+            border-color: #4caf50 !important;
+            color: #ffffff !important;
+        }
+        
+        .incorrect {
+            background: rgba(244, 67, 54, 0.3) !important;
+            border-color: #f44336 !important;
+        }
+        
+        .maslow-pyramid {
+            text-align: center;
+            margin: 30px auto;
+            max-width: 600px;
+        }
+        
+        .pyramid-level {
+            padding: 18px;
+            margin: 8px auto;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.6em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+        
+        .level-5 { 
+            width: 500px; 
+            background: #e74c3c; 
+            color: white;
+        }
+        .level-4 { 
+            width: 420px; 
+            background: #f39c12; 
+            color: white;
+        }
+        .level-3 { 
+            width: 340px; 
+            background: #f1c40f; 
+            color: #333;
+        }
+        .level-2 { 
+            width: 260px; 
+            background: #27ae60; 
+            color: white;
+        }
+        .level-1 { 
+            width: 180px; 
+            background: #9b59b6; 
+            color: white;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.6em;
+            font-weight: 500;
+        }
+        
+        .comparison-table th {
+            background: rgba(0, 188, 212, 0.3);
+            font-weight: bold;
+            font-size: 1.8em;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .highlight {
+            background: rgba(255, 215, 0, 0.3);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+        }
+        
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .slide h1 { font-size: 3em; }
+            .slide h2 { font-size: 2.5em; }
+            .slide p, .slide li { font-size: 1.5em; }
+            .controls button { padding: 12px 20px; font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Título -->
+<div class="slide active">
+    <h1>REVISÃO SM1</h1>
+    <h2>COMPORTAMENTO ORGANIZACIONAL</h2>
+    <p style="font-size: 2em; text-align: center; margin: 30px 0; color: #00bcd4;">
+        Material Completo para Primeira Avaliação
+    </p>
+    <div style="text-align: center; margin-top: 40px;">
+        <p style="font-size: 1.8em;"><strong>Prof. Alessandro Diaz Rodrigues</strong></p>
+        <p style="font-size: 1.6em;">Plano Completo Integrado - 12 Aulas (80h)</p>
+    </div>
+</div>
+
+<!-- Slide 2: Temas da SM1 -->
+<div class="slide">
+    <h1>TEMAS COBRADOS NA SM1</h1>
+    <div class="theory-box">
+        <h3>Conteúdo da Primeira Avaliação</h3>
+        <ul style="font-size: 2em; text-align: left; color: #f0f0f0;">
+            <li><strong style="color: #4caf50;">✓ Hierarquia das Necessidades de Maslow</strong></li>
+            <li><strong style="color: #4caf50;">✓ Comunicação Organizacional</strong></li>
+            <li><strong style="color: #4caf50;">✓ Feedback no Ambiente Corporativo</strong></li>
+            <li><strong style="color: #4caf50;">✓ Barreiras da Comunicação</strong></li>
+            <li><strong style="color: #4caf50;">✓ Ética Organizacional</strong></li>
+            <li><strong style="color: #4caf50;">✓ Comunicação Interna e Cultura Empresarial</strong></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 3: Hierarquia de Maslow - Introdução -->
+<div class="slide">
+    <h1>HIERARQUIA DAS NECESSIDADES</h1>
+    <h2>ABRAHAM MASLOW</h2>
+    <div class="theory-box">
+        <h3>Abraham Harold Maslow (1908-1970)</h3>
+        <p style="font-size: 1.8em; text-align: center;">
+            Psicólogo norte-americano famoso pela proposta da hierarquia de necessidades. 
+            Em 1943, propôs que as necessidades humanas estão organizadas hierarquicamente 
+            em cinco níveis, sendo que necessidades de nível inferior devem ser satisfeitas 
+            antes que as de nível superior se tornem motivadoras.
+        </p>
+    </div>
+</div>
+
+<!-- Slide 4: Pirâmide de Maslow -->
+<div class="slide">
+    <h2>A PIRÂMIDE DE MASLOW</h2>
+    <div class="maslow-pyramid">
+        <div class="pyramid-level level-1">AUTORREALIZAÇÃO</div>
+        <div class="pyramid-level level-2">ESTIMA</div>
+        <div class="pyramid-level level-3">SOCIAIS</div>
+        <div class="pyramid-level level-4">SEGURANÇA</div>
+        <div class="pyramid-level level-5">FISIOLÓGICAS</div>
+    </div>
+    <div class="warning-box">
+        <p style="font-size: 1.8em; font-weight: bold;">
+            Uma vez satisfeita uma necessidade, ela deixa de ser motivadora 
+            e a próxima na hierarquia se torna dominante.
+        </p>
+    </div>
+</div>
+
+<!-- Slide 5: Necessidades Fisiológicas -->
+<div class="slide">
+    <h2>NECESSIDADES FISIOLÓGICAS</h2>
+    <div class="theory-box">
+        <h3>Base da Pirâmide - Sobrevivência</h3>
+        <p style="font-size: 1.8em;">Necessidades básicas para manutenção da vida</p>
+    </div>
+    
+    <div class="comparison-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>EXEMPLOS GERAIS</th>
+                    <th>NO TRABALHO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Alimento, água, ar, sono</td>
+                    <td>Salário adequado às necessidades básicas</td>
+                </tr>
+                <tr>
+                    <td>Abrigo, sexo</td>
+                    <td>Condições físicas seguras no ambiente</td>
+                </tr>
+                <tr>
+                    <td>Regulação da temperatura</td>
+                    <td>Intervalos para descanso e alimentação</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Slide 6: Necessidades de Segurança -->
+<div class="slide">
+    <h2>NECESSIDADES DE SEGURANÇA</h2>
+    <div class="theory-box">
+        <h3>Segundo Nível - Proteção</h3>
+        <p style="font-size: 1.8em;">Proteção contra ameaças físicas e emocionais</p>
+    </div>
+    
+    <div class="comparison-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>EXEMPLOS GERAIS</th>
+                    <th>NO TRABALHO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Segurança física e proteção</td>
+                    <td>Estabilidade no emprego</td>
+                </tr>
+                <tr>
+                    <td>Estabilidade e ordem</td>
+                    <td>Plano de saúde e aposentadoria</td>
+                </tr>
+                <tr>
+                    <td>Liberdade do medo</td>
+                    <td>Ambiente de trabalho previsível</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Slide 7: Necessidades Sociais -->
+<div class="slide">
+    <h2>NECESSIDADES SOCIAIS (AFILIAÇÃO)</h2>
+    <div class="theory-box">
+        <h3>Terceiro Nível - Pertencimento</h3>
+        <p style="font-size: 1.8em;">Necessidade de relacionamento e aceitação social</p>
+    </div>
+    
+    <div class="comparison-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>EXEMPLOS GERAIS</th>
+                    <th>NO TRABALHO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amizade e aceitação</td>
+                    <td>Trabalho em equipe</td>
+                </tr>
+                <tr>
+                    <td>Amor e afeição</td>
+                    <td>Amizade com colegas e chefia</td>
+                </tr>
+                <tr>
+                    <td>Senso de pertencimento</td>
+                    <td>Integração social na organização</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Slide 8: Necessidades de Estima -->
+<div class="slide">
+    <h2>NECESSIDADES DE ESTIMA</h2>
+    <div class="theory-box">
+        <h3>Quarto Nível - Reconhecimento</h3>
+        <p style="font-size: 1.8em;">Necessidade de reconhecimento, status e prestígio</p>
+    </div>
+    
+    <div class="comparison-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>EXEMPLOS GERAIS</th>
+                    <th>NO TRABALHO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Autoestima e confiança</td>
+                    <td>Promoções e progressão</td>
+                </tr>
+                <tr>
+                    <td>Reconhecimento dos outros</td>
+                    <td>Reconhecimento público dos resultados</td>
+                </tr>
+                <tr>
+                    <td>Status e prestígio</td>
+                    <td>Títulos, responsabilidades importantes</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Slide 9: Necessidades de Autorrealização -->
+<div class="slide">
+    <h2>NECESSIDADES DE AUTORREALIZAÇÃO</h2>
+    <div class="theory-box">
+        <h3>Topo da Pirâmide - Potencial Máximo</h3>
+        <p style="font-size: 1.8em;">Realização do potencial individual máximo</p>
+    </div>
+    
+    <div class="comparison-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>EXEMPLOS GERAIS</th>
+                    <th>NO TRABALHO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Crescimento pessoal</td>
+                    <td>Trabalho desafiador e significativo</td>
+                </tr>
+                <tr>
+                    <td>Criatividade e inovação</td>
+                    <td>Autonomia e liberdade criativa</td>
+                </tr>
+                <tr>
+                    <td>Autoaperfeiçoamento</td>
+                    <td>Oportunidades de desenvolvimento</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Slide 10: Exemplo Netflix - Maslow -->
+<div class="slide">
+    <h2>EXEMPLO ATUAL: NETFLIX</h2>
+    <div class="example-box">
+        <h3>Como a Netflix aplica a Hierarquia de Maslow</h3>
+        <ul style="font-size: 1.7em;">
+            <li><strong style="color: #e74c3c;">FISIOLÓGICAS:</strong> Salários competitivos acima do mercado, alimentação gratuita nos escritórios</li>
+            <li><strong style="color: #f39c12;">SEGURANÇA:</strong> Estabilidade no emprego, benefícios abrangentes, seguro saúde premium</li>
+            <li><strong style="color: #f1c40f;">SOCIAIS:</strong> Cultura colaborativa, eventos de integração, diversidade e inclusão</li>
+            <li><strong style="color: #27ae60;">ESTIMA:</strong> Reconhecimento por performance, cultura de feedback contínuo</li>
+            <li><strong style="color: #9b59b6;">AUTORREALIZAÇÃO:</strong> Liberdade criativa, projetos inovadores, impacto global</li>
+        </ul>
+        <p style="margin-top: 20px; font-weight: bold; font-size: 1.8em; color: #4caf50;">
+            Resultado: Uma das empresas mais inovadoras e com melhor ambiente de trabalho do mundo
+        </p>
+    </div>
+</div>
+
+<!-- Slide 11: Comunicação Organizacional - Conceito -->
+<div class="slide">
+    <h1>COMUNICAÇÃO ORGANIZACIONAL</h1>
+    <div class="theory-box">
+        <h3>Definição (Snell & Bateman, 2012)</h3>
+        <p style="font-size: 2em; font-style: italic;">
+            "A comunicação pode ser definida como a <span class="highlight">transmissão de informação e significado</span> 
+            entre duas partes por meio do uso de símbolos compartilhados."
+        </p>
+    </div>
+    <div class="warning-box">
+        <p style="font-size: 1.8em; font-weight: bold;">
+            A comunicação vai além de apenas transmitir dados - ela constrói significado compartilhado!
+        </p>
+    </div>
+</div>
+
+<!-- Slide 12: Funções da Comunicação -->
+<div class="slide">
+    <h2>FUNÇÕES DA COMUNICAÇÃO (ROBBINS, 2010)</h2>
+    <div class="grid">
+        <div class="theory-box">
+            <h4>1. CONTROLE</h4>
+            <p>Orientar sobre normas, procedimentos e resultados esperados</p>
+            <p style="color: #4caf50;"><strong>Exemplo:</strong> Manual do funcionário, políticas da empresa</p>
+        </div>
+        <div class="theory-box">
+            <h4>2. MOTIVAÇÃO</h4>
+            <p>Reconhecer esforços e estimular pessoas</p>
+            <p style="color: #4caf50;"><strong>Exemplo:</strong> Feedbacks positivos, premiações</p>
+        </div>
+        <div class="theory-box">
+            <h4>3. EXPRESSÃO EMOCIONAL</h4>
+            <p>Manifestar emoções e sentimentos</p>
+            <p style="color: #4caf50;"><strong>Exemplo:</strong> Conversas informais, desabafos</p>
+        </div>
+        <div class="theory-box">
+            <h4>4. INFORMAÇÃO</h4>
+            <p>Transmitir dados para tomada de decisão</p>
+            <p style="color: #4caf50;"><strong>Exemplo:</strong> Relatórios, dashboards, meetings</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 13: Elementos do Processo de Comunicação -->
+<div class="slide">
+    <h2>ELEMENTOS DO PROCESSO DE COMUNICAÇÃO</h2>
+    <div class="theory-box">
+        <h3>Os 5 Elementos Essenciais</h3>
+        <ol style="font-size: 2em; text-align: left;">
+            <li><strong style="color: #ffd700;">EMISSOR:</strong> Quem origina a mensagem</li>
+            <li><strong style="color: #ffd700;">CANAL:</strong> Meio de transmissão (verbal, escrito, digital)</li>
+            <li><strong style="color: #ffd700;">RECEPTOR:</strong> Quem recebe a mensagem</li>
+            <li><strong style="color: #ffd700;">RUÍDO:</strong> Interferências que distorcem a mensagem</li>
+            <li><strong style="color: #ffd700;">FEEDBACK:</strong> Resposta do receptor ao emissor</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Slide 14: Tipos de Comunicação -->
+<div class="slide">
+    <h2>TIPOS DE COMUNICAÇÃO</h2>
+    <div class="grid">
+        <div class="theory-box">
+            <h3>POR DIREÇÃO</h3>
+            <ul style="font-size: 1.8em;">
+                <li><strong style="color: #00bcd4;">VERBAL:</strong> Palavras faladas ou escritas</li>
+                <li><strong style="color: #00bcd4;">NÃO VERBAL:</strong> Linguagem corporal, gestos, expressões faciais</li>
+            </ul>
+        </div>
+        <div class="theory-box">
+            <h3>POR FLUXO</h3>
+            <ul style="font-size: 1.8em;">
+                <li><strong style="color: #4caf50;">UNILATERAL:</strong> Sem retorno (comunicados, avisos)</li>
+                <li><strong style="color: #4caf50;">BILATERAL:</strong> Com feedback (conversas, reuniões)</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="example-box">
+        <h4>Exemplo Atual: Microsoft Teams</h4>
+        <p style="font-size: 1.7em;">
+            Durante a pandemia, o Teams integrou todas as funções: controle (políticas), 
+            motivação (reconhecimento), expressão emocional (emojis/GIFs) e informação 
+            (compartilhamento de arquivos).
+        </p>
+    </div>
+</div>
+
+<!-- Slide 15: Feedback no Ambiente Corporativo -->
+<div class="slide">
+    <h1>FEEDBACK NO AMBIENTE CORPORATIVO</h1>
+    <div class="theory-box">
+        <h3>Conceito e Importância</h3>
+        <p style="font-size: 2em;">
+            O feedback é o processo de fornecer informações sobre <span class="highlight">performance, 
+            comportamento ou resultados</span>, essencial para desenvolvimento pessoal e organizacional.
+        </p>
+    </div>
+</div>
+
+<!-- Slide 16: Características do Feedback Eficaz -->
+<div class="slide">
+    <h2>CARACTERÍSTICAS DO FEEDBACK EFICAZ</h2>
+    <div class="grid">
+        <div class="theory-box">
+            <h4>1. PRESENÇA CONSTANTE</h4>
+            <p>Recebemos feedback diariamente através das reações das pessoas</p>
+            <p style="color: #4caf50;">Pode ser formal (avaliações) ou informal (conversas)</p>
+        </div>
+        <div class="theory-box">
+            <h4>2. PODER TRANSFORMADOR</h4>
+            <p>Permite modificar percepções sobre ideias e comportamentos</p>
+            <p style="color: #4caf50;">Facilita reflexão sobre nossas atitudes</p>
+        </div>
+        <div class="theory-box">
+            <h4>3. PERSPECTIVA ANALÍTICA</h4>
+            <p>Postura neutra sobre quem oferece o feedback</p>
+            <p style="color: #4caf50;">Abertura para novas perspectivas sobre nossas ações</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 17: Tipos de Feedback -->
+<div class="slide">
+    <h2>TIPOS DE FEEDBACK</h2>
+    <div class="grid">
+        <div class="example-box" style="border-color: #4caf50; background: rgba(76, 175, 80, 0.15);">
+            <h4>FEEDBACK POSITIVO (REFORÇO)</h4>
+            <p><strong>Objetivo:</strong> Fortalecer comportamentos desejados</p>
+            <p style="font-size: 1.7em; font-style: italic; color: #4caf50;">
+                <strong>Exemplo:</strong> "Sua apresentação foi excelente, especialmente 
+                a parte sobre dados financeiros"
+            </p>
+        </div>
+        <div class="example-box" style="border-color: #ff9800; background: rgba(255, 152, 0, 0.15);">
+            <h4>FEEDBACK CONSTRUTIVO (DESENVOLVIMENTO)</h4>
+            <p><strong>Objetivo:</strong> Indicar áreas de melhoria</p>
+            <p style="font-size: 1.7em; font-style: italic; color: #ff9800;">
+                <strong>Exemplo:</strong> "Para próximas apresentações, sugiro incluir 
+                mais tempo para perguntas"
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 18: Exemplo Google - Feedback -->
+<div class="slide">
+    <h2>EXEMPLO ATUAL: SISTEMA gWhiz DO GOOGLE</h2>
+    <div class="example-box">
+        <h3>Como Funciona</h3>
+        <p style="font-size: 1.8em;">
+            O Google utiliza o sistema de feedback contínuo "gWhiz" onde funcionários 
+            recebem micro-feedbacks em tempo real, além das avaliações formais semestrais, 
+            criando uma cultura de melhoria constante.
+        </p>
+        
+        <div class="grid" style="margin-top: 25px;">
+            <div>
+                <h4>CARACTERÍSTICAS:</h4>
+                <ul style="font-size: 1.6em;">
+                    <li>Feedback instantâneo</li>
+                    <li>Peer-to-peer (entre colegas)</li>
+                    <li>Baseado em projetos específicos</li>
+                    <li>Integrado ao sistema de recompensas</li>
+                </ul>
+            </div>
+            <div>
+                <h4>RESULTADOS:</h4>
+                <ul style="font-size: 1.6em;">
+                    <li>Maior engajamento dos funcionários</li>
+                    <li>Desenvolvimento acelerado</li>
+                    <li>Cultura de aprendizado contínuo</li>
+                    <li>Redução de conflitos internos</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 19: Barreiras da Comunicação -->
+<div class="slide">
+    <h1>BARREIRAS DA COMUNICAÇÃO EFICAZ</h1>
+    <div class="theory-box">
+        <h3>Conceito</h3>
+        <p style="font-size: 2em;">
+            São <span class="highlight">obstáculos que impedem ou distorcem</span> 
+            a transmissão adequada da mensagem entre emissor e receptor.
+        </p>
+    </div>
+</div>
+
+<!-- Slide 20: Os 4 Tipos de Barreiras -->
+<div class="slide">
+    <h2>OS 4 TIPOS PRINCIPAIS DE BARREIRAS</h2>
+    <div class="grid">
+        <div class="theory-box" style="border-color: #e74c3c;">
+            <h4>1. BARREIRAS FÍSICAS</h4>
+            <p>Obstáculos no ambiente físico</p>
+            <p style="color: #4caf50;">Ruído, distância, problemas técnicos</p>
+            <p style="font-style: italic;">Ex: Problemas de conexão em videochamadas</p>
+        </div>
+        <div class="theory-box" style="border-color: #f39c12;">
+            <h4>2. BARREIRAS FISIOLÓGICAS</h4>
+            <p>Limitações dos sentidos humanos</p>
+            <p style="color: #4caf50;">Problemas auditivos, visuais, fadiga</p>
+            <p style="font-style: italic;">Ex: Fadiga de videoconferência (Zoom fatigue)</p>
+        </div>
+        <div class="theory-box" style="border-color: #9b59b6;">
+            <h4>3. BARREIRAS SEMÂNTICAS</h4>
+            <p>Problemas de significado e interpretação</p>
+            <p style="color: #4caf50;">Jargões técnicos, idiomas diferentes</p>
+            <p style="font-style: italic;">Ex: Mal-entendidos em comunicação por texto</p>
+        </div>
+        <div class="theory-box" style="border-color: #27ae60;">
+            <h4>4. BARREIRAS PSICOLÓGICAS</h4>
+            <p>Estados emocionais e mentais</p>
+            <p style="color: #4caf50;">Preconceitos, stress, ansiedade</p>
+            <p style="font-style: italic;">Ex: Resistência a mudanças digitais</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 21: Exemplo Slack - Barreiras -->
+<div class="slide">
+    <h2>EXEMPLO ATUAL: COMO O SLACK COMBATE BARREIRAS</h2>
+    <div class="example-box">
+        <h3>Estratégias do Slack</h3>
+        <div class="grid">
+            <div>
+                <h4>BARREIRAS COMBATIDAS:</h4>
+                <ul style="font-size: 1.6em;">
+                    <li><strong>Semântica:</strong> Threads organizados por tópicos</li>
+                    <li><strong>Psicológica:</strong> Emojis para clareza emocional</li>
+                    <li><strong>Física:</strong> Integração com outras ferramentas</li>
+                    <li><strong>Fisiológica:</strong> Status de presença visível</li>
+                </ul>
+            </div>
+            <div>
+                <h4>RECURSOS ESPECÍFICOS:</h4>
+                <ul style="font-size: 1.6em;">
+                    <li>Canais temáticos para organização</li>
+                    <li>Reações emoji para feedback rápido</li>
+                    <li>Mensagens diretas para comunicação privada</li>
+                    <li>Integração com calendário e documentos</li>
+                </ul>
+            </div>
+        </div>
+        <p style="margin-top: 20px; font-weight: bold; font-size: 1.8em; color: #4caf50;">
+            Resultado: Slack se tornou uma das ferramentas de comunicação empresarial mais utilizadas globalmente
+        </p>
+    </div>
+</div>
+
+<!-- Slide 22: Ética Organizacional -->
+<div class="slide">
+    <h1>ÉTICA ORGANIZACIONAL</h1>
+    <div class="theory-box">
+        <h3>Conceito Filosófico</h3>
+        <p style="font-size: 2em;">
+            A ética deriva do grego <span class="highlight">"ethikos"</span> 
+            (ethos = costume, caráter), estudando padrões de "certo" e "errado" 
+            que orientam comportamento e pensamento em relação aos outros.
+        </p>
+    </div>
+</div>
+
+<!-- Slide 23: Ética vs Moral -->
+<div class="slide">
+    <h2>DIFERENÇA: ÉTICA vs MORAL</h2>
+    <div class="comparison-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ÉTICA</th>
+                    <th>MORAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ciência que estuda a conduta humana</td>
+                    <td>Qualidade da conduta quando julgada</td>
+                </tr>
+                <tr>
+                    <td>Princípios universais do bem e mal</td>
+                    <td>Regras específicas de uma sociedade/época</td>
+                </tr>
+                <tr>
+                    <td>Reflexão racional sobre comportamento</td>
+                    <td>Vontade individual de fazer algo</td>
+                </tr>
+                <tr>
+                    <td>Campo de estudo teórico</td>
+                    <td>Aplicação prática de valores</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Slide 24: Características da Ética Organizacional -->
+<div class="slide">
+    <h2>CARACTERÍSTICAS DA ÉTICA ORGANIZACIONAL</h2>
+    <div class="grid">
+        <div class="theory-box">
+            <h4>1. NÃO É MANUAL RÍGIDO</h4>
+            <p>Não existem regras absolutas para todas as situações</p>
+            <p style="color: #4caf50;">Requer interpretação e julgamento contextual</p>
+        </div>
+        <div class="theory-box">
+            <h4>2. CAMPO DE ESTUDO</h4>
+            <p>Como tentamos viver de acordo com padrões éticos</p>
+            <p style="color: #4caf50;">Como pensamos e nos comportamos em relação aos outros</p>
+        </div>
+        <div class="theory-box">
+            <h4>3. BASEADA EM REFLEXÃO</h4>
+            <p>Vai além da lei (o que é legal nem sempre é ético)</p>
+            <p style="color: #4caf50;">Considera costumes mas não se limita a eles</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 25: Exemplo Patagonia - Ética -->
+<div class="slide">
+    <h2>EXEMPLO ATUAL: PATAGONIA</h2>
+    <div class="example-box">
+        <h3>Ética Organizacional na Prática</h3>
+        <p style="font-size: 1.8em;">
+            A Patagonia exemplifica ética organizacional ao priorizar sustentabilidade 
+            sobre lucro, doando 100% dos lucros para combater mudanças climáticas, 
+            mesmo quando isso reduz vendas de produtos.
+        </p>
+        
+        <div class="grid" style="margin-top: 25px;">
+            <div>
+                <h4>AÇÕES ÉTICAS:</h4>
+                <ul style="font-size: 1.6em;">
+                    <li>Programa "1% for the Planet"</li>
+                    <li>Materiais reciclados e orgânicos</li>
+                    <li>Transparência na cadeia de suprimentos</li>
+                    <li>Ativismo ambiental corporativo</li>
+                </ul>
+            </div>
+            <div>
+                <h4>RESULTADOS:</h4>
+                <ul style="font-size: 1.6em;">
+                    <li>Fidelidade extrema do cliente</li>
+                    <li>Atração de talentos alinhados</li>
+                    <li>Reconhecimento global como marca ética</li>
+                    <li>Crescimento sustentável de receita</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 26: Comunicação Interna -->
+<div class="slide">
+    <h1>COMUNICAÇÃO INTERNA</h1>
+    <h2>E CULTURA EMPRESARIAL</h2>
+    <div class="theory-box">
+        <h3>Conceito Estratégico</h3>
+        <p style="font-size: 2em;">
+            A comunicação interna vai além de informar objetivamente; 
+            ela <span class="highlight">constrói identidade organizacional e engajamento</span>.
+        </p>
+    </div>
+</div>
+
+<!-- Slide 27: Funções da Comunicação Interna -->
+<div class="slide">
+    <h2>FUNÇÕES DA COMUNICAÇÃO INTERNA</h2>
+    <div class="grid">
+        <div class="theory-box">
+            <h4>1. CRIAÇÃO DE CULTURA</h4>
+            <p><strong>Objetivo:</strong> Desenvolver identidade organizacional</p>
+            <p><strong>Resultado:</strong> Funcionários "vestem a camisa"</p>
+            <p style="color: #ff9800;"><strong>Requisito:</strong> Coerência entre discurso e realidade</p>
+        </div>
+        <div class="theory-box">
+            <h4>2. CONSTRUÇÃO DE CLIMA</h4>
+            <p><strong>Objetivo:</strong> Ambiente de trabalho positivo</p>
+            <p><strong>Resultado:</strong> Maior identificação e pertencimento</p>
+            <p style="color: #ff9800;"><strong>Requisito:</strong> Alinhamento com experiência real</p>
+        </div>
+        <div class="theory-box" style="grid-column: 1 / -1;">
+            <h4>3. ENGAJAMENTO</h4>
+            <p><strong>Objetivo:</strong> Conexão emocional com a empresa</p>
+            <p><strong>Resultado:</strong> Maior produtividade e retenção</p>
+            <p style="color: #ff9800;"><strong>Requisito:</strong> Autenticidade na comunicação</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 28: Riscos da Comunicação Incoerente -->
+<div class="slide">
+    <h2>RISCOS DA COMUNICAÇÃO INCOERENTE</h2>
+    <div class="warning-box">
+        <h3>EFEITO BOOMERANG</h3>
+        <ul style="font-size: 2em; text-align: left;">
+            <li>Quando discurso não reflete realidade</li>
+            <li>Gera cinismo e desengajamento</li>
+            <li>Pode ter impacto negativo na motivação</li>
+            <li>Destrói confiança na liderança</li>
+        </ul>
+    </div>
+    
+    <div class="theory-box">
+        <h3>Estratégias para Evitar</h3>
+        <p style="font-size: 1.8em;">
+            Transparência, consistência, interatividade, personalização e frequência adequada
+        </p>
+    </div>
+</div>
+
+<!-- Slide 29: Exemplo Nubank -->
+<div class="slide">
+    <h2>EXEMPLO ATUAL: NUBANK</h2>
+    <div class="example-box">
+        <h3>Comunicação Interna Autêntica</h3>
+        <p style="font-size: 1.8em;">
+            O Nubank usa comunicação interna autêntica através de "NuTalks" semanais com CEO, 
+            transparência sobre métricas da empresa e linguagem informal que reflete genuinamente 
+            a cultura jovem e inovadora.
+        </p>
+        
+        <div class="grid" style="margin-top: 25px;">
+            <div>
+                <h4>ESTRATÉGIAS:</h4>
+                <ul style="font-size: 1.6em;">
+                    <li>CEO acessível e transparente</li>
+                    <li>Linguagem descontraída e autêntica</li>
+                    <li>Métricas compartilhadas abertamente</li>
+                    <li>Canais múltiplos de comunicação</li>
+                </ul>
+            </div>
+            <div>
+                <h4>RESULTADOS:</h4>
+                <ul style="font-size: 1.6em;">
+                    <li>Alta satisfação dos funcionários</li>
+                    <li>Baixo turnover voluntário</li>
+                    <li>Cultura de inovação consolidada</li>
+                    <li>Marca empregadora forte</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- QUESTÕES DE REVISÃO -->
+
+<!-- Slide 30: Questão 1 - Maslow -->
+<div class="slide">
+    <h2>QUESTÃO 1 - HIERARQUIA DE MASLOW</h2>
+    <div class="theory-box">
+        <p style="font-size: 1.8em;">
+            Segundo Abraham Maslow, as necessidades humanas estão organizadas hierarquicamente 
+            em categorias. Quais são essas cinco categorias, da base para o topo da pirâmide?
+        </p>
+    </div>
+    
+    <div class="quiz-option">a) De segurança, básicas, de estima e sociais</div>
+    <div class="quiz-option">b) De autorrealização, de estima, de segurança e afetivas</div>
+    <div class="quiz-option">c) Básicas, sociais e afetivas</div>
+    <div class="quiz-option">d) Sociais, afetivas e psicológicas</div>
+    <div class="quiz-option correct">e) De autorrealização, de estima, sociais, de segurança e fisiológicas ✓</div>
+</div>
+
+<!-- Slide 31: Questão 2 - Comunicação -->
+<div class="slide">
+    <h2>QUESTÃO 2 - FUNÇÕES DA COMUNICAÇÃO</h2>
+    <div class="theory-box">
+        <p style="font-size: 1.8em;">
+            De acordo com Robbins (2010), quais são as quatro principais funções 
+            que a comunicação desempenha dentro de uma organização?
+        </p>
+    </div>
+    
+    <div class="quiz-option">a) Receptor, Emissor, Canal, Mensagem</div>
+    <div class="quiz-option">b) Linguagem corporal, Verbal, Não verbal, Silêncio</div>
+    <div class="quiz-option">c) Unilateral, Bilateral, Ascendente, Descendente</div>
+    <div class="quiz-option correct">d) Controle, Motivação, Expressão emocional, Informação ✓</div>
+    <div class="quiz-option">e) Feedback, Feedforward, Planejamento, Tomada de decisão</div>
+</div>
+
+<!-- Slide 32: Questão 3 - Elementos -->
+<div class="slide">
+    <h2>QUESTÃO 3 - ELEMENTOS DA COMUNICAÇÃO</h2>
+    <div class="theory-box">
+        <p style="font-size: 1.8em;">
+            Quais são os elementos essenciais que compõem um processo completo de comunicação?
+        </p>
+    </div>
+    
+    <div class="quiz-option">a) Emissor, Receptor, Ruído, Feedback</div>
+    <div class="quiz-option">b) Emissor, Canal, Receptor, Feedback</div>
+    <div class="quiz-option correct">c) Emissor, Canal, Receptor, Ruído, Feedback ✓</div>
+    <div class="quiz-option">d) Emissor, Receptor, Feedback</div>
+    <div class="quiz-option">e) Emissor, Canal, Receptor</div>
+</div>
+
+<!-- Slide 33: Questão 4 - Tipos -->
+<div class="slide">
+    <h2>QUESTÃO 4 - TIPOS DE COMUNICAÇÃO</h2>
+    <div class="theory-box">
+        <p style="font-size: 1.8em;">
+            Existem diferentes métodos de comunicação utilizados para transmitir informações. 
+            Quais são os dois tipos principais baseados na forma de expressão?
+        </p>
+    </div>
+    
+    <div class="quiz-option">a) Não Verbal e Não Verbal</div>
+    <div class="quiz-option">b) Não verbal e Corporal</div>
+    <div class="quiz-option">c) Não Verbal e Digital</div>
+    <div class="quiz-option">d) Verbal e Verbal</div>
+    <div class="quiz-option correct">e) Verbal e Não Verbal ✓</div>
+</div>
+
+<!-- Slide 34: Questão 5 - Barreiras -->
+<div class="slide">
+    <h2>QUESTÃO 5 - BARREIRAS DA COMUNICAÇÃO</h2>
+    <div class="theory-box">
+        <p style="font-size: 1.8em;">
+            Várias barreiras podem interferir na comunicação eficaz nas organizações. 
+            Quais são os principais tipos de barreiras identificados?
+        </p>
+    </div>
+    
+    <div class="quiz-option">a) Fisiológicas, semânticas, verbais, não verbais</div>
+    <div class="quiz-option">b) Físicas, fisiológicas, semânticas, verbais</div>
+    <div class="quiz-option">c) Físicas, verbais e não verbais</div>
+    <div class="quiz-option correct">d) Físicas, fisiológicas, semânticas, psicológicas ✓</div>
+    <div class="quiz-option">e) Semânticas, verbais, não verbais</div>
+</div>
+
+<!-- Slide 35: Questão 6 - Feedback -->
+<div class="slide">
+    <h2>QUESTÃO 6 - FEEDBACK ORGANIZACIONAL</h2>
+    <div class="theory-box">
+        <p style="font-size: 1.6em;">
+            Sobre o feedback no ambiente corporativo, analise as afirmativas:<br><br>
+            I - Costumamos receber feedback constantemente através das reações das pessoas<br>
+            II - As perspectivas dos outros nos permitem modificar nossa forma de encarar ideias<br>
+            III - Uma postura neutra sobre quem oferece feedback pode revelar novas perspectivas
+        </p>
+    </div>
+    
+    <div class="quiz-option">a) Apenas os itens I e III estão corretos</div>
+    <div class="quiz-option">b) Apenas o item III está correto</div>
+    <div class="quiz-option correct">c) Todos os itens estão corretos ✓</div>
+    <div class="quiz-option">d) Apenas o item II está correto</div>
+    <div class="quiz-option">e) Apenas o item I está correto</div>
+</div>
+
+<!-- Slide 36: Questão 7 - Comunicação Interna -->
+<div class="slide">
+    <h2>QUESTÃO 7 - COMUNICAÇÃO INTERNA</h2>
+    <div class="theory-box">
+        <p style="font-size: 1.8em;">
+            Um comunicado interno organizacional não serve apenas para informar algo objetivo. 
+            Qual é sua função adicional mais importante?
+        </p>
+    </div>
+    
+    <div class="quiz-option">a) Criar uma identidade uniforme na empresa</div>
+    <div class="quiz-option correct">b) Desenvolver uma cultura organizacional para que funcionários se identifiquem e se engajem ✓</div>
+    <div class="quiz-option">c) Nenhuma das alternativas anteriores</div>
+    <div class="quiz-option">d) Estabelecer o clima organizacional adequado</div>
+    <div class="quiz-option">e) Todas as alternativas estão corretas</div>
+</div>
+
+<!-- Slide 37: Questão 8 - Ética -->
+<div class="slide">
+    <h2>QUESTÃO 8 - CONCEITO DE ÉTICA</h2>
+    <div class="theory-box">
+        <p style="font-size: 1.7em;">
+            Sobre o conceito de ética, desenvolvido desde filósofos como Sócrates, 
+            Aristóteles e Platão, qual alternativa está correta?
+        </p>
+    </div>
+    
+    <div class="quiz-option">a) A ética pode ser considerada um manual rígido com regras absolutas</div>
+    <div class="quiz-option">b) Ética e moral são sinônimos que estudam a vontade individual</div>
+    <div class="quiz-option">c) A ética baseia-se exclusivamente na lei e no que é considerado justo</div>
+    <div class="quiz-option correct">d) O campo da ética estuda como tentamos viver de acordo com padrões que definem "certo" e "errado" ✓</div>
+    <div class="quiz-option">e) Ética vem do grego "eticus", significando "vontade"</div>
+</div>
+
+<!-- Slide 38: Questão 9 - Habilidades -->
+<div class="slide">
+    <h2>QUESTÃO 9 - HABILIDADES DE COMUNICAÇÃO</h2>
+    <div class="theory-box">
+        <p style="font-size: 1.8em;">
+            As habilidades humanas relacionadas ao envio e recebimento de informações, 
+            pensamentos, sentimentos e atitudes são competências de:
+        </p>
+    </div>
+    
+    <div class="quiz-option">a) Planejamento</div>
+    <div class="quiz-option">b) Controle</div>
+    <div class="quiz-option">c) Avaliação de desempenho</div>
+    <div class="quiz-option correct">d) Comunicação ✓</div>
+    <div class="quiz-option">e) Pensamento</div>
+</div>
+
+<!-- Slide 39: Questão 10 - Comunicação Bilateral -->
+<div class="slide">
+    <h2>QUESTÃO 10 - COMUNICAÇÃO BILATERAL</h2>
+    <div class="theory-box">
+        <p style="font-size: 1.8em;">
+            Quando ocorre interação entre quem envia a mensagem e quem a recebe, 
+            com retorno por parte do receptor, esse tipo de comunicação é denominada:
+        </p>
+    </div>
+    
+    <div class="quiz-option">a) Unilateral</div>
+    <div class="quiz-option">b) Vertical</div>
+    <div class="quiz-option">c) Diagonal</div>
+    <div class="quiz-option">d) Horizontal</div>
+    <div class="quiz-option correct">e) Bilateral ✓</div>
+</div>
+
+<!-- Slide 40: Dicas Finais -->
+<div class="slide">
+    <h2>DICAS FINAIS PARA SM1</h2>
+    <div class="theory-box">
+        <h3>FOQUE NOS CONCEITOS-CHAVE</h3>
+        <ol style="font-size: 1.8em; text-align: left;">
+            <li><strong style="color: #ffd700;">Maslow:</strong> Memorize as 5 necessidades na ordem correta</li>
+            <li><strong style="color: #ffd700;">Comunicação:</strong> Funções (4) e elementos (5) do processo</li>
+            <li><strong style="color: #ffd700;">Feedback:</strong> Importância e características principais</li>
+            <li><strong style="color: #ffd700;">Barreiras:</strong> 4 tipos principais (física, fisiológica, semântica, psicológica)</li>
+            <li><strong style="color: #ffd700;">Ética:</strong> Diferença conceitual entre ética e moral</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Slide 41: Estratégias de Estudo -->
+<div class="slide">
+    <h2>ESTRATÉGIAS DE ESTUDO</h2>
+    <div class="grid">
+        <div class="example-box">
+            <h3>TÉCNICAS RECOMENDADAS</h3>
+            <ul style="font-size: 1.6em;">
+                <li>Mapas mentais para hierarquia de Maslow</li>
+                <li>Casos práticos para funções da comunicação</li>
+                <li>Exemplos atuais para fixar conceitos</li>
+                <li>Simulados com questões similares</li>
+                <li>Resumos com palavras-chave destacadas</li>
+            </ul>
+        </div>
+        <div class="example-box">
+            <h3>CRONOGRAMA SUGERIDO</h3>
+            <ul style="font-size: 1.6em;">
+                <li><strong>3 dias antes:</strong> Revisão geral dos temas</li>
+                <li><strong>2 dias antes:</strong> Exercícios práticos</li>
+                <li><strong>1 dia antes:</strong> Revisão das dicas-chave</li>
+                <li><strong>Dia da prova:</strong> Leitura leve dos resumos</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 42: Principais Autores -->
+<div class="slide">
+    <h2>PRINCIPAIS AUTORES PARA SM1</h2>
+    <div class="theory-box">
+        <h3>MEMORIZE ESTES NOMES</h3>
+        <ul style="font-size: 1.8em; text-align: left;">
+            <li><strong style="color: #ffd700;">Abraham Maslow</strong> - Hierarquia das necessidades (5 níveis)</li>
+            <li><strong style="color: #00bcd4;">Stephen Robbins (2010)</strong> - Funções da comunicação (4 funções)</li>
+            <li><strong style="color: #4caf50;">Snell & Bateman (2012)</strong> - Conceito de comunicação organizacional</li>
+            <li><strong style="color: #ff9800;">Bergamini, Vergara, Latham</strong> - Conceitos de motivação</li>
+            <li><strong style="color: #9b59b6;">Chiavenato</strong> - Comportamento organizacional geral</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 43: Termos-Chave -->
+<div class="slide">
+    <h2>TERMOS-CHAVE PARA MEMORIZAR</h2>
+    <div class="grid">
+        <div class="theory-box">
+            <h4>MASLOW (5 NECESSIDADES)</h4>
+            <ol style="font-size: 1.6em; text-align: left;">
+                <li>Fisiológicas</li>
+                <li>Segurança</li>
+                <li>Sociais</li>
+                <li>Estima</li>
+                <li>Autorrealização</li>
+            </ol>
+        </div>
+        <div class="theory-box">
+            <h4>COMUNICAÇÃO</h4>
+            <ul style="font-size: 1.6em; text-align: left;">
+                <li>Controle, Motivação, Expressão, Informação</li>
+                <li>Emissor, Canal, Receptor, Ruído, Feedback</li>
+                <li>Verbal e Não Verbal</li>
+                <li>Unilateral e Bilateral</li>
+            </ul>
+        </div>
+        <div class="theory-box">
+            <h4>BARREIRAS (4 TIPOS)</h4>
+            <ul style="font-size: 1.6em; text-align: left;">
+                <li>Físicas</li>
+                <li>Fisiológicas</li>
+                <li>Semânticas</li>
+                <li>Psicológicas</li>
+            </ul>
+        </div>
+        <div class="theory-box">
+            <h4>FEEDBACK</h4>
+            <ul style="font-size: 1.6em; text-align: left;">
+                <li>Positivo (Reforço)</li>
+                <li>Construtivo (Desenvolvimento)</li>
+                <li>Características: Constante, Transformador, Analítico</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 44: Resumo Final -->
+<div class="slide">
+    <h1>RESUMO FINAL</h1>
+    <div class="theory-box">
+        <h3>CHECKLIST PARA A PROVA</h3>
+        <ul style="font-size: 1.8em; text-align: left;">
+            <li><strong>✓ ÉTICA:</strong> Diferença entre ética e moral + características organizacionais</li>
+            <li><strong>✓ COMUNICAÇÃO INTERNA:</strong> 3 funções + riscos do efeito boomerang</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 45: Conclusão -->
+<div class="slide">
+    <h1>SUCESSO NA SUA SM1!</h1>
+    <div class="theory-box">
+        <h3>VOCÊ ESTÁ PREPARADO!</h3>
+        <p style="font-size: 2.2em; text-align: center; color: #4caf50;">
+            Com este material completo, você domina todos os conceitos essenciais 
+            para um excelente desempenho na primeira avaliação.
+        </p>
+    </div>
+    
+    <div class="example-box">
+        <h3>LEMBRETE FINAL</h3>
+        <ul style="font-size: 1.8em;">
+            <li>Leia as questões com atenção</li>
+            <li>Identifique as palavras-chave</li>
+            <li>Relembre os conceitos estudados</li>
+            <li>Confie no seu conhecimento</li>
+        </ul>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px; font-size: 2em;">
+        <p><strong style="color: #ffd700;">BOA SORTE!</strong></p>
+        <p style="margin-top: 20px;"><strong>Prof. Alessandro Diaz Rodrigues</strong></p>
+    </div>
+</div>
+
+<!-- Contador e Controles -->
+<div class="slide-counter">
+    <span id="current">1</span> / <span id="total">45</span>
+</div>
+
+<div class="controls">
+    <button id="prev">◀ Anterior</button>
+    <button id="next">Próximo ▶</button>
+    <button id="fullscreen">Tela Cheia</button>
+    <button id="home" onclick="window.open('index.html', '_self')">🏠 Início</button>
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+
+document.getElementById('total').textContent = total;
+
+function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = n;
+    if (current >= total) current = 0;
+    if (current < 0) current = total - 1;
+    slides[current].classList.add('active');
+    document.getElementById('current').textContent = current + 1;
+}
+
+document.getElementById('next').onclick = () => showSlide(current + 1);
+document.getElementById('prev').onclick = () => showSlide(current - 1);
+document.getElementById('fullscreen').onclick = () => {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        document.documentElement.requestFullscreen();
+    }
+};
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        showSlide(current + 1);
+    } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        showSlide(current - 1);
+    } else if (e.key === 'f' || e.key === 'F') {
+        document.getElementById('fullscreen').click();
+    } else if (e.key === 'Home') {
+        window.open('index.html', '_self');
+    }
+});
+
+// Melhorar cliques nos quiz
+document.querySelectorAll('.quiz-option').forEach(option => {
+    option.addEventListener('click', function() {
+        // Remove seleções anteriores dos irmãos
+        this.parentNode.querySelectorAll('.quiz-option').forEach(opt => {
+            opt.classList.remove('incorrect');
+        });
+        
+        // Se não é a correta, marca como incorreta
+        if (!this.classList.contains('correct')) {
+            this.classList.add('incorrect');
+        }
+    });
+});
+
+console.log('Revisão SM1 carregada com', total, 'slides');
+console.log('✓ Otimizada para datashow');
+console.log('✓ Cores de alto contraste');
+console.log('✓ Navegação funcional');
+</script>
+</body>
+</html>MASLOW:</strong> 5 necessidades hierárquicas (fisiológicas → autorrealização)</li>
+            <li><strong>✓ COMUNICAÇÃO:</strong> 4 funções + 5 elementos do processo</li>
+            <li><strong>✓ TIPOS:</strong> Verbal/Não Verbal + Unilateral/Bilateral</li>
+            <li><strong>✓ FEEDBACK:</strong> Positivo vs Construtivo + 3 características</li>
+            <li><strong>✓ BARREIRAS:</strong> 4 tipos principais (física, fisiológica, semântica, psicológica)</li>
+            <li><strong>✓ 

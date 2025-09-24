@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teorias Motivacionais - CO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #ffffff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            padding: 60px 80px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            position: relative;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 40px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            margin-bottom: 35px;
+            color: #00bcd4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: #4caf50;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        p, li {
+            font-size: 1.8em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        ul {
+            text-align: left;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .teoria-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .exemplo-pratico {
+            background: rgba(76, 175, 80, 0.2);
+            border-left: 5px solid #4caf50;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .destaque {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: rgba(0, 188, 212, 0.8);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 188, 212, 1);
+            transform: scale(1.05);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            z-index: 100;
+        }
+
+        .piramide-maslow {
+            width: 600px;
+            height: 500px;
+            margin: 20px auto;
+            position: relative;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        .nivel-maslow {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 5px 0;
+            font-size: 1.4em;
+            font-weight: bold;
+            width: 80%;
+            text-align: center;
+        }
+
+        .formula {
+            font-size: 2.5em;
+            color: #ffd700;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .biografia {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            max-width: 800px;
+        }
+
+        .home-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(255, 99, 71, 0.8);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .home-btn:hover {
+            background: rgba(255, 99, 71, 1);
+            transform: scale(1.05);
+        }
+
+        .tabela-herzberg {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+            max-width: 1000px;
+        }
+
+        .coluna-fatores {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .fator-motivacional {
+            border-left: 5px solid #4caf50;
+        }
+
+        .fator-higienico {
+            border-left: 5px solid #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <a href="index.html" class="home-btn">🏠 Início</a>
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">50</span>
+        </div>
+
+        <!-- Slide 1: Título -->
+        <div class="slide active">
+            <h1>🧠 TEORIAS MOTIVACIONAIS</h1>
+            <h2>Comportamento Organizacional</h2>
+            <p class="destaque">Compreendendo o que move as pessoas no ambiente de trabalho</p>
+            <div class="teoria-box">
+                <p><strong>Objetivos da Aula:</strong></p>
+                <ul>
+                    <li>Entender os conceitos fundamentais de motivação</li>
+                    <li>Conhecer as principais teorias motivacionais</li>
+                    <li>Aplicar teorias na prática organizacional</li>
+                    <li>Analisar casos reais de empresas</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 2: O que é Motivação? -->
+        <div class="slide">
+            <h2>🎯 O QUE É MOTIVAÇÃO?</h2>
+            <div class="teoria-box">
+                <p><strong>Etimologia:</strong> Do latim <span class="destaque">"movere"</span> = mover + ação</p>
+                <p>Motivação é a <span class="destaque">energia interna</span> que impulsiona as pessoas em direção aos seus objetivos.</p>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💡 Reflexão:</h3>
+                <p>O que te motivou a escolher seu curso? O que te motiva a estudar?</p>
+                <p><span class="destaque">C = f (P,M)</span><br>
+                <em>Comportamento é uma função de Pessoa e Meio ambiente</em></p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Conceitos de Motivação - Bergamini -->
+        <div class="slide">
+            <h2>📚 CONCEITOS DE MOTIVAÇÃO</h2>
+            <div class="biografia">
+                <h3>🔬 Cecília Bergamini (2013)</h3>
+                <p><strong>Definição:</strong> "Aquilo que faz as pessoas se moverem em direção a algo e como o fazem são o objeto de estudo da motivação."</p>
+                <p><span class="destaque">Movere</span> = Mover + Ação</p>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💼 No Trabalho:</h3>
+                <p>Um funcionário que busca promoção se move em direção a melhores resultados, capacitação e networking.</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Conceitos - Vergara -->
+        <div class="slide">
+            <h2>📖 CONCEITOS DE MOTIVAÇÃO</h2>
+            <div class="biografia">
+                <h3>🔬 Sylvia Vergara (2005)</h3>
+                <p><strong>Definição:</strong> "Motivação é uma energia que impulsiona em direção a algo, um motivo que leva à ação."</p>
+                <p><span class="destaque">Força Intrínseca:</span> Está dentro de cada indivíduo</p>
+            </div>
+            <div class="teoria-box">
+                <p><strong>Importante:</strong> Ninguém motiva ninguém!</p>
+                <p>Os outros podem apenas <span class="destaque">estimular, incentivar ou provocar</span> nossa motivação.</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Conceitos - Latham -->
+        <div class="slide">
+            <h2>🎯 CONCEITOS DE MOTIVAÇÃO</h2>
+            <div class="biografia">
+                <h3>🔬 Gary Latham (2012)</h3>
+                <p><strong>Foco:</strong> A importância das <span class="destaque">metas e objetivos</span> na motivação</p>
+                <ul>
+                    <li>Necessidades individuais</li>
+                    <li>Valores pessoais</li>
+                    <li>Ambiente de trabalho</li>
+                    <li>Definição de metas</li>
+                    <li>Emoções das pessoas</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <p><strong>Exemplo:</strong> Funcionário do mês, ranking de vendedores, reconhecimento público</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Hierarquia de Maslow - Introdução -->
+        <div class="slide">
+            <h2>🏔️ HIERARQUIA DAS NECESSIDADES DE MASLOW</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 Abraham Harold Maslow (1908-1970)</h3>
+                <p>Psicólogo norte-americano, famoso pela <span class="destaque">Hierarquia de Necessidades</span></p>
+                <p><strong>Conceito Principal:</strong> As necessidades são organizadas em <span class="destaque">escala hierárquica</span> de acordo com a urgência.</p>
+            </div>
+            <div class="teoria-box">
+                <p><strong>Princípio Fundamental:</strong></p>
+                <p>As pessoas buscam suprir as necessidades <span class="destaque">inferiores</span> antes de tentar satisfazer às de nível mais <span class="destaque">elevado</span>.</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Pirâmide de Maslow -->
+        <div class="slide">
+            <h2>🔺 A PIRÂMIDE DE MASLOW</h2>
+            <div class="piramide-maslow">
+                <div class="nivel-maslow">AUTORREALIZAÇÃO</div>
+                <div class="nivel-maslow">ESTIMA</div>
+                <div class="nivel-maslow">SOCIAIS</div>
+                <div class="nivel-maslow">SEGURANÇA</div>
+                <div class="nivel-maslow">FISIOLÓGICAS</div>
+            </div>
+            <p>As 5 categorias de necessidades humanas organizadas hierarquicamente</p>
+        </div>
+
+        <!-- Slide 8: Necessidades Fisiológicas -->
+        <div class="slide">
+            <h2>🍽️ NECESSIDADES FISIOLÓGICAS</h2>
+            <div class="teoria-box">
+                <h3>Base da Pirâmide - Sobrevivência</h3>
+                <ul>
+                    <li><span class="destaque">Fome:</span> Alimentação adequada</li>
+                    <li><span class="destaque">Sede:</span> Hidratação</li>
+                    <li><span class="destaque">Sono:</span> Descanso e repouso</li>
+                    <li><span class="destaque">Sexo:</span> Reprodução</li>
+                    <li><span class="destaque">Abrigo:</span> Proteção física</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💼 No Ambiente de Trabalho:</h3>
+                <p><strong>Salário adequado</strong> para suprir necessidades básicas, <strong>intervalo para refeições</strong>, ambiente com temperatura adequada, <strong>banheiros</strong> disponíveis.</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Necessidades de Segurança -->
+        <div class="slide">
+            <h2>🛡️ NECESSIDADES DE SEGURANÇA</h2>
+            <div class="teoria-box">
+                <h3>Segundo Nível - Proteção e Estabilidade</h3>
+                <ul>
+                    <li><span class="destaque">Física:</span> Ausência de ameaças</li>
+                    <li><span class="destaque">Estabilidade:</span> Previsibilidade</li>
+                    <li><span class="destaque">Ordem:</span> Organização</li>
+                    <li><span class="destaque">Lei:</span> Regras claras</li>
+                    <li><span class="destaque">Proteção:</span> Segurança</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💼 No Ambiente de Trabalho:</h3>
+                <p><strong>Estabilidade no emprego</strong>, políticas claras da empresa, <strong>equipamentos de segurança</strong>, plano de saúde, <strong>aposentadoria</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Necessidades Sociais -->
+        <div class="slide">
+            <h2>👥 NECESSIDADES SOCIAIS</h2>
+            <div class="teoria-box">
+                <h3>Terceiro Nível - Relacionamento e Pertencimento</h3>
+                <ul>
+                    <li><span class="destaque">Amor:</span> Relacionamentos afetivos</li>
+                    <li><span class="destaque">Amizade:</span> Vínculos sociais</li>
+                    <li><span class="destaque">Aceitação:</span> Ser aceito pelo grupo</li>
+                    <li><span class="destaque">Pertencimento:</span> Fazer parte</li>
+                    <li><span class="destaque">Compreensão:</span> Ser compreendido</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💼 No Ambiente de Trabalho:</h3>
+                <p><strong>Trabalho em equipe</strong>, eventos sociais da empresa, <strong>integração</strong> entre colegas, grupos de trabalho, <strong>happy hour</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Necessidades de Estima -->
+        <div class="slide">
+            <h2>🏆 NECESSIDADES DE ESTIMA</h2>
+            <div class="teoria-box">
+                <h3>Quarto Nível - Reconhecimento e Status</h3>
+                <p><strong>Interna:</strong> Autoestima, confiança, autorrespeito</p>
+                <p><strong>Externa:</strong> Reconhecimento, prestígio, status</p>
+                <ul>
+                    <li><span class="destaque">Orgulho:</span> Satisfação pessoal</li>
+                    <li><span class="destaque">Status:</span> Posição social</li>
+                    <li><span class="destaque">Prestígio:</span> Admiração dos outros</li>
+                    <li><span class="destaque">Reconhecimento:</span> Valorização</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💼 No Ambiente de Trabalho:</h3>
+                <p><strong>Funcionário do mês</strong>, ranking de desempenho, <strong>promoções</strong>, elogios públicos, <strong>responsabilidades importantes</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Necessidades de Autorrealização -->
+        <div class="slide">
+            <h2>🌟 NECESSIDADES DE AUTORREALIZAÇÃO</h2>
+            <div class="teoria-box">
+                <h3>Topo da Pirâmide - Potencial Máximo</h3>
+                <ul>
+                    <li><span class="destaque">Autodesenvolvimento:</span> Crescimento pessoal</li>
+                    <li><span class="destaque">Excelência:</span> Busca pela perfeição</li>
+                    <li><span class="destaque">Competência:</span> Domínio de habilidades</li>
+                    <li><span class="destaque">Criatividade:</span> Expressão original</li>
+                    <li><span class="destaque">Propósito:</span> Significado na vida</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💼 No Ambiente de Trabalho:</h3>
+                <p><strong>Projetos desafiadores</strong>, autonomia para criar, <strong>inovação</strong>, trabalho com propósito social, <strong>mentoria</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Slide 13: Exemplo Netflix - Maslow -->
+        <div class="slide">
+            <h2>🎬 EXEMPLO: NETFLIX E MASLOW</h2>
+            <div class="exemplo-pratico">
+                <h3>Como a Netflix aplica Maslow:</h3>
+                <p><strong>🍽️ Fisiológicas:</strong> Salários competitivos, refeições gratuitas</p>
+                <p><strong>🛡️ Segurança:</strong> Planos de saúde premium, estabilidade</p>
+                <p><strong>👥 Sociais:</strong> Cultura colaborativa, eventos de equipe</p>
+                <p><strong>🏆 Estima:</strong> Reconhecimento por performance, promoções</p>
+                <p><strong>🌟 Autorrealização:</strong> Projetos inovadores, liberdade criativa</p>
+            </div>
+            <div class="teoria-box">
+                <p><strong>Resultado:</strong> Uma das empresas mais desejadas para trabalhar no mundo!</p>
+            </div>
+        </div>
+
+        <!-- Slide 14: Críticas a Maslow -->
+        <div class="slide">
+            <h2>⚖️ CRÍTICAS À TEORIA DE MASLOW</h2>
+            <div class="teoria-box">
+                <h3>Limitações Identificadas:</h3>
+                <ul>
+                    <li><span class="destaque">Nem todos seguem a ordem:</span> Algumas pessoas podem pular níveis</li>
+                    <li><span class="destaque">Necessidades simultâneas:</span> Múltiplas necessidades ao mesmo tempo</li>
+                    <li><span class="destaque">Diferenças culturais:</span> Varia entre sociedades</li>
+                    <li><span class="destaque">Falta de evidência empírica:</span> Poucos estudos comprobatórios</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💡 Exemplo:</h3>
+                <p>Um artista pode priorizar <span class="destaque">autorrealização</span> (criar arte) mesmo sem ter todas as necessidades básicas satisfeitas.</p>
+            </div>
+        </div>
+
+        <!-- Slide 15: Teoria dos Dois Fatores - Herzberg -->
+        <div class="slide">
+            <h2>⚖️ TEORIA DOS DOIS FATORES - HERZBERG</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 Frederick Herzberg (1923-2000)</h3>
+                <p>Psicólogo norte-americano que revolucionou os estudos sobre satisfação no trabalho</p>
+            </div>
+            <div class="teoria-box">
+                <h3>🔑 Descoberta Principal:</h3>
+                <p class="destaque">"O oposto da satisfação não é a insatisfação, mas a ausência dela"</p>
+                <p>São dois conjuntos distintos de fatores que influenciam a motivação!</p>
+            </div>
+        </div>
+
+        <!-- Slide 16: Fatores Motivacionais vs Higiênicos -->
+        <div class="slide">
+            <h2>⚖️ FATORES MOTIVACIONAIS vs HIGIÊNICOS</h2>
+            <div class="tabela-herzberg">
+                <div class="coluna-fatores fator-motivacional">
+                    <h3>✅ FATORES MOTIVACIONAIS</h3>
+                    <p><strong>Intrínsecos - Geram Satisfação</strong></p>
+                    <ul>
+                        <li>Trabalho em si</li>
+                        <li>Realização</li>
+                        <li>Reconhecimento</li>
+                        <li>Progresso profissional</li>
+                        <li>Responsabilidade</li>
+                    </ul>
+                </div>
+                <div class="coluna-fatores fator-higienico">
+                    <h3>⚠️ FATORES HIGIÊNICOS</h3>
+                    <p><strong>Extrínsecos - Evitam Insatisfação</strong></p>
+                    <ul>
+                        <li>Condições de trabalho</li>
+                        <li>Administração da empresa</li>
+                        <li>Salário</li>
+                        <li>Relações com supervisor</li>
+                        <li>Benefícios e serviços</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Como Aplicar Herzberg -->
+        <div class="slide">
+            <h2>🎯 APLICANDO HERZBERG NA PRÁTICA</h2>
+            <div class="exemplo-pratico">
+                <h3>✅ Para MOTIVAR (Satisfação):</h3>
+                <ul>
+                    <li>Enriqueça as tarefas com desafios</li>
+                    <li>Dê reconhecimento público pelo bom trabalho</li>
+                    <li>Ofereça oportunidades de crescimento</li>
+                    <li>Aumente a autonomia e responsabilidade</li>
+                </ul>
+            </div>
+            <div class="teoria-box">
+                <h3>⚠️ Para EVITAR DESMOTIVAÇÃO (Insatisfação):</h3>
+                <ul>
+                    <li>Mantenha salários competitivos</li>
+                    <li>Melhore as condições físicas do trabalho</li>
+                    <li>Crie políticas justas e claras</li>
+                    <li>Desenvolva boas relações com chefia</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 18: Exemplo Google - Herzberg -->
+        <div class="slide">
+            <h2>🔍 EXEMPLO: GOOGLE E HERZBERG</h2>
+            <div class="exemplo-pratico">
+                <h3>Como o Google aplica os Dois Fatores:</h3>
+                <p><strong>✅ Fatores Motivacionais:</strong></p>
+                <ul>
+                    <li><span class="destaque">20% do tempo</span> para projetos pessoais</li>
+                    <li>Reconhecimento através do <span class="destaque">"peer bonus"</span></li>
+                    <li>Projetos desafiadores e inovadores</li>
+                </ul>
+                <p><strong>⚠️ Fatores Higiênicos:</strong></p>
+                <ul>
+                    <li>Escritórios modernos e confortáveis</li>
+                    <li>Salários acima da média do mercado</li>
+                    <li>Benefícios extraordinários (massagem, academia)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 19: Teoria das Necessidades Adquiridas - McClelland -->
+        <div class="slide">
+            <h2>🎯 TEORIA DAS NECESSIDADES ADQUIRIDAS</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 David McClelland (1917-1998)</h3>
+                <p>Psicólogo norte-americano especialista em motivação humana</p>
+            </div>
+            <div class="teoria-box">
+                <h3>🔑 Conceito Principal:</h3>
+                <p>As necessidades são <span class="destaque">desenvolvidas ao longo da vida</span> através de experiências culturais e sociais</p>
+                <p><strong>3 Necessidades Principais:</strong></p>
+                <ul>
+                    <li>Necessidade de <span class="destaque">Realização</span> (nAch)</li>
+                    <li>Necessidade de <span class="destaque">Poder</span> (nPow)</li>
+                    <li>Necessidade de <span class="destaque">Afiliação</span> (nAff)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 20: Necessidade de Realização -->
+        <div class="slide">
+            <h2>🏆 NECESSIDADE DE REALIZAÇÃO (nAch)</h2>
+            <div class="teoria-box">
+                <h3>Características da Pessoa com Alta nAch:</h3>
+                <ul>
+                    <li><span class="destaque">Busca excelência:</span> Quer fazer sempre melhor</li>
+                    <li><span class="destaque">Assume riscos moderados:</span> Nem muito fácil, nem impossível</li>
+                    <li><span class="destaque">Quer feedback:</span> Precisa saber como está indo</li>
+                    <li><span class="destaque">Responsabilidade pessoal:</span> Quer fazer por si mesmo</li>
+                    <li><span class="destaque">Inovação:</span> Busca formas melhores de fazer</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💼 No Trabalho:</h3>
+                <p>Vendedores que batem metas, empreendedores, pessoas que buscam <span class="destaque">desafios constantes</span> e crescimento profissional.</p>
+            </div>
+        </div>
+
+        <!-- Slide 21: Necessidade de Poder -->
+        <div class="slide">
+            <h2>👑 NECESSIDADE DE PODER (nPow)</h2>
+            <div class="teoria-box">
+                <h3>Duas Facetas do Poder:</h3>
+                <p><strong>🏛️ Poder Socializado (Positivo):</strong></p>
+                <ul>
+                    <li>Usar poder para <span class="destaque">beneficiar a organização</span></li>
+                    <li>Influenciar para o <span class="destaque">bem comum</span></li>
+                    <li>Desenvolver outros</li>
+                </ul>
+                <p><strong>⚠️ Poder Personalizado (Negativo):</strong></p>
+                <ul>
+                    <li>Usar poder para <span class="destaque">benefício próprio</span></li>
+                    <li>Dominação e controle</li>
+                    <li>Status e prestígio pessoal</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💼 Exemplo:</h3>
+                <p>Gerentes, diretores, políticos, pessoas em <span class="destaque">posições de liderança</span>.</p>
+            </div>
+        </div>
+
+        <!-- Slide 22: Necessidade de Afiliação -->
+        <div class="slide">
+            <h2>👥 NECESSIDADE DE AFILIAÇÃO (nAff)</h2>
+            <div class="teoria-box">
+                <h3>Características da Pessoa com Alta nAff:</h3>
+                <ul>
+                    <li><span class="destaque">Busca relacionamentos:</span> Quer ser aceito e querido</li>
+                    <li><span class="destaque">Evita conflitos:</span> Prefere harmonia</li>
+                    <li><span class="destaque">Colaboração:</span> Trabalha bem em equipe</li>
+                    <li><span class="destaque">Sensibilidade social:</span> Percebe sentimentos dos outros</li>
+                    <li><span class="destaque">Conformidade:</span> Segue normas do grupo</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💼 No Trabalho:</h3>
+                <p>Pessoas de <span class="destaque">Recursos Humanos</span>, assistentes sociais, professores, profissionais que trabalham com atendimento ao cliente.</p>
+            </div>
+        </div>
+
+        <!-- Slide 23: Aplicação Prática McClelland -->
+        <div class="slide">
+            <h2>🎯 APLICANDO McCLELLAND NA PRÁTICA</h2>
+            <div class="exemplo-pratico">
+                <h3>🔍 Como Identificar e Motivar:</h3>
+                <p><strong>🏆 Alta Realização:</strong> Projetos desafiadores, metas claras, feedback constante</p>
+                <p><strong>👑 Alta Poder:</strong> Posições de liderança, responsabilidade por equipes</p>
+                <p><strong>👥 Alta Afiliação:</strong> Trabalho em equipe, ambiente colaborativo, harmonia</p>
+            </div>
+            <div class="teoria-box">
+                <h3>💡 Dica Importante:</h3>
+                <p>Identifique o <span class="destaque">perfil predominante</span> de cada pessoa e adapte as estratégias motivacionais!</p>
+            </div>
+        </div>
+
+        <!-- Slide 24: Teoria da Expectativa - Vroom -->
+        <div class="slide">
+            <h2>📊 TEORIA DA EXPECTATIVA - VROOM</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 Victor Vroom (1932-presente)</h3>
+                <p>Psicólogo canadense especialista em teoria organizacional</p>
+            </div>
+            <div class="formula">
+                MOTIVAÇÃO = EXPECTÂNCIA × INSTRUMENTALIDADE × VALÊNCIA
+            </div>
+            <div class="teoria-box">
+                <p><strong>💡 Conceito:</strong> A motivação é resultado da <span class="destaque">multiplicação</span> de três fatores. Se qualquer um for zero, não há motivação!</p>
+            </div>
+        </div>
+
+        <!-- Slide 25: Componentes da Teoria da Expectativa -->
+        <div class="slide">
+            <h2>🔍 COMPONENTES DA EXPECTATIVA</h2>
+            <div class="teoria-box">
+                <h3>🎯 EXPECTÂNCIA:</h3>
+                <p>"Se eu me <span class="destaque">esforçar</span>, conseguirei ter um bom <span class="destaque">desempenho</span>?"</p>
+            </div>
+            <div class="teoria-box">
+                <h3>🔗 INSTRUMENTALIDADE:</h3>
+                <p>"Se eu tiver um bom <span class="destaque">desempenho</span>, vou receber a <span class="destaque">recompensa</span>?"</p>
+            </div>
+            <div class="teoria-box">
+                <h3>💎 VALÊNCIA:</h3>
+                <p>"Eu realmente <span class="destaque">valorizo</span> essa recompensa?"</p>
+            </div>
+        </div>
+
+        <!-- Slide 26: Exemplo Prático Maria Paula -->
+        <div class="slide">
+            <h2>👩‍💼 EXEMPLO: MARIA PAULA E O RELATÓRIO</h2>
+            <div class="exemplo-pratico">
+                <h3>Situação:</h3>
+                <p>Maria Paula precisa entregar um relatório importante</p>
+                
+                <p><strong>🎯 Expectância:</strong> "Se trabalhar 2h extras por dia, conseguirei terminar antes do prazo" ✅</p>
+                
+                <p><strong>🔗 Instrumentalidade:</strong> "Se terminar antes do prazo, posso tirar um dia de folga" ✅</p>
+                
+                <p><strong>💎 Valência:</strong> "Eu valorizo muito ter um dia de folga para estudar" ✅</p>
+                
+                <p><strong>🚀 Resultado:</strong> <span class="destaque">ALTA MOTIVAÇÃO</span></p>
+            </div>
+        </div>
+
+        <!-- Slide 27: Cenários de Desmotivação -->
+        <div class="slide">
+            <h2>⚠️ CENÁRIOS DE DESMOTIVAÇÃO</h2>
+            <div class="teoria-box">
+                <h3>🚫 Cenário 1 - Valência Zero:</h3>
+                <p>Maria Paula <span class="destaque">não valoriza</span> o dia de folga<br>
+                ✅ Expectância × ✅ Instrumentalidade × <span class="destaque">❌ Valência = 0</span></p>
+            </div>
+            <div class="teoria-box">
+                <h3>🚫 Cenário 2 - Expectância Zero:</h3>
+                <p>Maria Paula acha <span class="destaque">impossível</span> terminar no prazo<br>
+                <span class="destaque">❌ Expectância</span> × ✅ Instrumentalidade × ✅ Valência = 0</p>
+            </div>
+            <div class="teoria-box">
+                <h3>🚫 Cenário 3 - Instrumentalidade Zero:</h3>
+                <p>Maria Paula <span class="destaque">não confia</span> que receberá a recompensa<br>
+                ✅ Expectância × <span class="destaque">❌ Instrumentalidade</span> × ✅ Valência = 0</p>
+            </div>
+        </div>
+
+        <!-- Slide 28: Aplicando Vroom na Prática -->
+        <div class="slide">
+            <h2>🎯 APLICANDO VROOM NA GESTÃO</h2>
+            <div class="exemplo-pratico">
+                <h3>Para Garantir Alta Motivação:</h3>
+                <p><strong>🎯 Aumentar Expectância:</strong></p>
+                <ul>
+                    <li>Treinamento e capacitação</li>
+                    <li>Recursos adequados</li>
+                    <li>Metas realistas e claras</li>
+                </ul>
+                <p><strong>🔗 Garantir Instrumentalidade:</strong></p>
+                <ul>
+                    <li>Cumprimento de promessas</li>
+                    <li>Políticas claras de recompensa</li>
+                    <li>Transparência nos critérios</li>
+                </ul>
+                <p><strong>💎 Descobrir Valência:</strong></p>
+                <ul>
+                    <li>Pesquisas de satisfação</li>
+                    <li>Conversas individuais</li>
+                    <li>Variedade de recompensas</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 29: Teoria do Flow - Csikszentmihalyi -->
+        <div class="slide">
+            <h2>🌊 TEORIA DO FLOW</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 Mihaly Csikszentmihalyi</h3>
+                <p>Psicólogo húngaro, criador do conceito de <span class="destaque">"Flow"</span></p>
+                <p><strong>Flow:</strong> Estado mental de completa imersão e foco na atividade</p>
+            </div>
+            <div class="teoria-box">
+                <h3>🔑 Condições para o Flow:</h3>
+                <ul>
+                    <li><span class="destaque">Desafio equilibrado:</span> Nem muito fácil, nem impossível</li>
+                    <li><span class="destaque">Habilidades adequadas:</span> Capacidade para realizar</li>
+                    <li><span class="destaque">Metas claras:</span> Objetivos bem definidos</li>
+                    <li><span class="destaque">Feedback imediato:</span> Saber como está indo</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 30: Gráfico do Flow -->
+        <div class="slide">
+            <h2>📊 O GRÁFICO DO FLOW</h2>
+            <div class="teoria-box" style="padding: 40px;">
+                <div style="background: white; color: black; padding: 30px; border-radius: 15px; position: relative; height: 400px;">
+                    <div style="position: absolute; left: 50%; top: 20px; transform: translateX(-50%); font-weight: bold;">ALTO DESAFIO</div>
+                    <div style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-weight: bold;">BAIXA HABILIDADE</div>
+                    <div style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%) rotate(90deg); font-weight: bold;">ALTA HABILIDADE</div>
+                    <div style="position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); font-weight: bold;">BAIXO DESAFIO</div>
+                    
+                    <!-- Flow Zone -->
+                    <div style="position: absolute; top: 25%; right: 25%; background: #4CAF50; color: white; padding: 10px; border-radius: 5px; font-weight: bold;">FLOW</div>
+                    
+                    <!-- Other zones -->
+                    <div style="position: absolute; top: 30%; left: 25%; background: #ff9800; color: white; padding: 8px; border-radius: 5px; font-size: 0.9em;">Ansiedade</div>
+                    <div style="position: absolute; bottom: 30%; right: 25%; background: #f44336; color: white; padding: 8px; border-radius: 5px; font-size: 0.9em;">Tédio</div>
+                    <div style="position: absolute; bottom: 30%; left: 25%; background: #9e9e9e; color: white; padding: 8px; border-radius: 5px; font-size: 0.9em;">Apatia</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 31: Aplicando Flow no Trabalho -->
+        <div class="slide">
+            <h2>🎯 APLICANDO FLOW NO TRABALHO</h2>
+            <div class="exemplo-pratico">
+                <h3>Como Criar Condições de Flow:</h3>
+                <p><strong>⚖️ Equilibrar Desafio e Habilidade:</strong></p>
+                <ul>
+                    <li>Projetos adequados ao nível de experiência</li>
+                    <li>Aumentar complexidade gradualmente</li>
+                    <li>Capacitação contínua</li>
+                </ul>
+                <p><strong>🎯 Metas Claras e Feedback:</strong></p>
+                <ul>
+                    <li>Objetivos específicos e mensuráveis</li>
+                    <li>Feedback regular sobre desempenho</li>
+                    <li>Autonomia para ajustar métodos</li>
+                </ul>
+            </div>
+            <div class="teoria-box">
+                <p><strong>Resultado:</strong> Maior <span class="destaque">produtividade, satisfação e bem-estar</span> no trabalho!</p>
+            </div>
+        </div>
+
+        <!-- Slide 32: Motivação Intrínseca vs Extrínseca -->
+        <div class="slide">
+            <h2>🔄 MOTIVAÇÃO INTRÍNSECA vs EXTRÍNSECA</h2>
+            <div class="tabela-herzberg">
+                <div class="coluna-fatores fator-motivacional">
+                    <h3>💎 MOTIVAÇÃO INTRÍNSECA</h3>
+                    <p><strong>Vem de dentro da pessoa</strong></p>
+                    <ul>
+                        <li>Prazer na atividade</li>
+                        <li>Satisfação pessoal</li>
+                        <li>Crescimento</li>
+                        <li>Autonomia</li>
+                        <li>Propósito</li>
+                    </ul>
+                    <p class="destaque">Mais duradoura e sustentável</p>
+                </div>
+                <div class="coluna-fatores fator-higienico">
+                    <h3>🏆 MOTIVAÇÃO EXTRÍNSECA</h3>
+                    <p><strong>Vem de recompensas externas</strong></p>
+                    <ul>
+                        <li>Dinheiro</li>
+                        <li>Reconhecimento</li>
+                        <li>Prêmios</li>
+                        <li>Status</li>
+                        <li>Promoções</li>
+                    </ul>
+                    <p class="destaque">Efeito temporário</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 33: O Paradoxo das Recompensas -->
+        <div class="slide">
+            <h2>⚠️ O PARADOXO DAS RECOMPENSAS</h2>
+            <div class="teoria-box">
+                <h3>🚨 Cuidado com as Recompensas Externas!</h3>
+                <p>Pesquisas mostram que <span class="destaque">oferecer recompensas pode diminuir</span> o efeito dos incentivos intrínsecos</p>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>📸 Exemplo da Fotografia:</h3>
+                <p>Você gosta de tirar fotos por prazer (intrínseco). Um amigo te paga para fotografar o casamento dele (extrínseco).</p>
+                <p><strong>Resultado:</strong> O pagamento pode <span class="destaque">diminuir seu prazer</span> em fotografar, pois adiciona pressão e responsabilidade.</p>
+            </div>
+            <div class="teoria-box">
+                <p><strong>Dica:</strong> Use recompensas externas com cuidado. Foque no <span class="destaque">desenvolvimento da motivação intrínseca</span>!</p>
+            </div>
+        </div>
+
+        <!-- Slide 34: Teoria X e Y - McGregor -->
+        <div class="slide">
+            <h2>⚡ TEORIA X e Y - McGREGOR</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 Douglas McGregor (1906-1964)</h3>
+                <p>Psicólogo americano que estudou diferentes filosofias de gestão</p>
+            </div>
+            <div class="tabela-herzberg">
+                <div class="coluna-fatores fator-higienico">
+                    <h3>❌ TEORIA X</h3>
+                    <p><strong>Visão Pessimista</strong></p>
+                    <ul>
+                        <li>Pessoas são preguiçosas</li>
+                        <li>Evitam responsabilidade</li>
+                        <li>Precisam de controle</li>
+                        <li>Motivadas apenas por dinheiro</li>
+                    </ul>
+                </div>
+                <div class="coluna-fatores fator-motivacional">
+                    <h3>✅ TEORIA Y</h3>
+                    <p><strong>Visão Otimista</strong></p>
+                    <ul>
+                        <li>Trabalho é natural</li>
+                        <li>Buscam responsabilidade</li>
+                        <li>São criativas</li>
+                        <li>Motivadas por crescimento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 35: Aplicação das Teorias X e Y -->
+        <div class="slide">
+            <h2>🎯 APLICAÇÃO DAS TEORIAS X e Y</h2>
+            <div class="exemplo-pratico">
+                <h3>❌ Gerente Teoria X:</h3>
+                <ul>
+                    <li>Controle rígido</li>
+                    <li>Supervisão constante</li>
+                    <li>Punições por erros</li>
+                    <li>Foco apenas em resultados</li>
+                </ul>
+                <p><strong>Resultado:</strong> Funcionários desmotivados e dependentes</p>
+            </div>
+            <div class="teoria-box">
+                <h3>✅ Gerente Teoria Y:</h3>
+                <ul>
+                    <li>Delegação de autoridade</li>
+                    <li>Participação nas decisões</li>
+                    <li>Desenvolvimento de pessoas</li>
+                    <li>Reconhecimento e crescimento</li>
+                </ul>
+                <p><strong>Resultado:</strong> Funcionários <span class="destaque">motivados e proativos</span></p>
+            </div>
+        </div>
+
+        <!-- Slide 36: Gamificação e Motivação -->
+        <div class="slide">
+            <h2>🎮 GAMIFICAÇÃO E MOTIVAÇÃO</h2>
+            <div class="teoria-box">
+                <h3>🎯 O que é Gamificação?</h3>
+                <p>Aplicação de elementos de <span class="destaque">jogos</span> em contextos não-lúdicos para aumentar engajamento e motivação</p>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🏆 Elementos de Gamificação:</h3>
+                <ul>
+                    <li><span class="destaque">Pontos:</span> Sistema de pontuação por conquistas</li>
+                    <li><span class="destaque">Badges:</span> Distintivos por marcos atingidos</li>
+                    <li><span class="destaque">Rankings:</span> Comparação de desempenho</li>
+                    <li><span class="destaque">Níveis:</span> Progressão por estágios</li>
+                    <li><span class="destaque">Desafios:</span> Metas específicas a alcançar</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 37: Exemplo Gamificação -->
+        <div class="slide">
+            <h2>🎮 EXEMPLO: DUOLINGO</h2>
+            <div class="exemplo-pratico">
+                <h3>Como o Duolingo Motiva os Usuários:</h3>
+                <p><strong>🎯 Pontos XP:</strong> Ganhos por lições concluídas</p>
+                <p><strong>🏆 Conquistas:</strong> Badges por marcos especiais</p>
+                <p><strong>📊 Sequências:</strong> Dias consecutivos estudando</p>
+                <p><strong>⚔️ Competições:</strong> Ligas semanais entre usuários</p>
+                <p><strong>📈 Progresso Visual:</strong> Barras e níveis de avanço</p>
+            </div>
+            <div class="teoria-box">
+                <h3>🚀 Resultado:</h3>
+                <p>Mais de <span class="destaque">500 milhões</span> de usuários engajados no aprendizado de idiomas!</p>
+            </div>
+        </div>
+
+        <!-- Slide 38: Generações e Motivação -->
+        <div class="slide">
+            <h2>👥 GERAÇÕES E MOTIVAÇÃO NO TRABALHO</h2>
+            <div class="teoria-box">
+                <h3>👴 Baby Boomers (1946-1964):</h3>
+                <p>Valorizam: <span class="destaque">Estabilidade, hierarquia, reconhecimento</span></p>
+            </div>
+            <div class="teoria-box">
+                <h3>👨 Geração X (1965-1980):</h3>
+                <p>Valorizam: <span class="destaque">Equilíbrio trabalho-vida, autonomia</span></p>
+            </div>
+            <div class="teoria-box">
+                <h3>👨‍💼 Millennials (1981-1996):</h3>
+                <p>Valorizam: <span class="destaque">Propósito, feedback, desenvolvimento</span></p>
+            </div>
+            <div class="teoria-box">
+                <h3>👨‍🎓 Geração Z (1997-2012):</h3>
+                <p>Valorizam: <span class="destaque">Flexibilidade, tecnologia, diversidade</span></p>
+            </div>
+        </div>
+
+        <!-- Slide 39: Estratégias por Geração -->
+        <div class="slide">
+            <h2>🎯 ESTRATÉGIAS MOTIVACIONAIS POR GERAÇÃO</h2>
+            <div class="exemplo-pratico">
+                <h3>Como Motivar Cada Geração:</h3>
+                <p><strong>👴 Boomers:</strong> Reconhecimento formal, estabilidade no emprego</p>
+                <p><strong>👨 Gen X:</strong> Flexibilidade de horário, home office</p>
+                <p><strong>👨‍💼 Millennials:</strong> Mentoria, projetos com impacto social</p>
+                <p><strong>👨‍🎓 Gen Z:</strong> Tecnologia avançada, diversidade e inclusão</p>
+            </div>
+            <div class="teoria-box">
+                <p><strong>💡 Dica:</strong> Uma abordagem <span class="destaque">"one size fits all"</span> não funciona mais. Personalize suas estratégias!</p>
+            </div>
+        </div>
+
+        <!-- Slide 40: Motivação e Home Office -->
+        <div class="slide">
+            <h2>🏠 MOTIVAÇÃO NO HOME OFFICE</h2>
+            <div class="teoria-box">
+                <h3>🎯 Desafios Motivacionais:</h3>
+                <ul>
+                    <li><span class="destaque">Isolamento social:</span> Falta de interação</li>
+                    <li><span class="destaque">Distrações:</span> Ambiente não controlado</li>
+                    <li><span class="destaque">Falta de supervisão:</span> Autonomia excessiva</li>
+                    <li><span class="destaque">Work-life balance:</span> Mistura casa/trabalho</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>✅ Estratégias para Motivar:</h3>
+                <ul>
+                    <li>Reuniões regulares por vídeo</li>
+                    <li>Metas claras e mensuráveis</li>
+                    <li>Reconhecimento virtual público</li>
+                    <li>Ferramentas de colaboração</li>
+                    <li>Flexibilidade de horários</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 41: Inteligência Emocional e Motivação -->
+        <div class="slide">
+            <h2>🧠❤️ INTELIGÊNCIA EMOCIONAL E MOTIVAÇÃO</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 Daniel Goleman</h3>
+                <p>Psicólogo americano, popularizou o conceito de <span class="destaque">Inteligência Emocional (IE)</span></p>
+            </div>
+            <div class="teoria-box">
+                <h3>🔑 Os 5 Componentes da IE:</h3>
+                <ul>
+                    <li><span class="destaque">Autoconsciência:</span> Conhecer suas emoções</li>
+                    <li><span class="destaque">Autorregulação:</span> Controlar impulsos</li>
+                    <li><span class="destaque">Automotivação:</span> Motivação intrínseca</li>
+                    <li><span class="destaque">Empatia:</span> Entender outros</li>
+                    <li><span class="destaque">Habilidades sociais:</span> Relacionar-se bem</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 42: Desenvolvendo Automotivação -->
+        <div class="slide">
+            <h2>🚀 DESENVOLVENDO AUTOMOTIVAÇÃO</h2>
+            <div class="exemplo-pratico">
+                <h3>🎯 Estratégias Práticas:</h3>
+                <ul>
+                    <li><span class="destaque">Defina metas claras:</span> SMART (Específicas, Mensuráveis, Atingíveis, Relevantes, Temporais)</li>
+                    <li><span class="destaque">Celebre pequenas vitórias:</span> Reconheça progressos incrementais</li>
+                    <li><span class="destaque">Visualize o sucesso:</span> Imagine alcançando seus objetivos</li>
+                    <li><span class="destaque">Mantenha foco no propósito:</span> Lembre-se do "porquê"</li>
+                    <li><span class="destaque">Pratique autocompaixão:</span> Seja gentil consigo mesmo</li>
+                </ul>
+            </div>
+            <div class="teoria-box">
+                <p><strong>Lembre-se:</strong> A motivação é como um <span class="destaque">músculo</span> - precisa ser exercitada!</p>
+            </div>
+        </div>
+
+        <!-- Slide 43: Motivação e Performance -->
+        <div class="slide">
+            <h2>📈 MOTIVAÇÃO E PERFORMANCE</h2>
+            <div class="formula">
+                PERFORMANCE = HABILIDADE × MOTIVAÇÃO × OPORTUNIDADE
+            </div>
+            <div class="teoria-box">
+                <h3>🔍 Interpretando a Fórmula:</h3>
+                <p><strong>🎯 Habilidade:</strong> Conhecimentos, competências técnicas</p>
+                <p><strong>🔥 Motivação:</strong> Vontade, energia, comprometimento</p>
+                <p><strong>🚪 Oportunidade:</strong> Recursos, ambiente, suporte</p>
+            </div>
+            <div class="exemplo-pratico">
+                <p><strong>💡 Insight:</strong> Se qualquer um dos fatores for <span class="destaque">zero</span>, a performance também será zero!</p>
+            </div>
+        </div>
+
+        <!-- Slide 44: Medindo Motivação -->
+        <div class="slide">
+            <h2>📊 MEDINDO MOTIVAÇÃO NA EMPRESA</h2>
+            <div class="exemplo-pratico">
+                <h3>🔍 Indicadores de Motivação:</h3>
+                <ul>
+                    <li><span class="destaque">Turnover:</span> Taxa de rotatividade</li>
+                    <li><span class="destaque">Absenteísmo:</span> Faltas não justificadas</li>
+                    <li><span class="destaque">Produtividade:</span> Resultados por funcionário</li>
+                    <li><span class="destaque">Engajamento:</span> Participação em atividades</li>
+                    <li><span class="destaque">NPS Interno:</span> Recomendação da empresa</li>
+                </ul>
+            </div>
+            <div class="teoria-box">
+                <h3>📋 Ferramentas de Medição:</h3>
+                <ul>
+                    <li>Pesquisas de clima organizacional</li>
+                    <li>Entrevistas de feedback</li>
+                    <li>Pulse surveys (pesquisas rápidas)</li>
+                    <li>One-on-ones regulares</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 45: Caso de Sucesso - Spotify -->
+        <div class="slide">
+            <h2>🎵 CASO DE SUCESSO: SPOTIFY</h2>
+            <div class="exemplo-pratico">
+                <h3>Como o Spotify Motiva seus Funcionários:</h3>
+                <p><strong>🎯 Autonomia:</strong> Squads autônomas com liberdade de decisão</p>
+                <p><strong>🚀 Propósito:</strong> "Democratizar a música para todos"</p>
+                <p><strong>🏆 Maestria:</strong> Tempo dedicado para aprender (Hack Days)</p>
+                <p><strong>👥 Comunidade:</strong> Cultura de colaboração e transparência</p>
+                <p><strong>🌱 Crescimento:</strong> Carreira técnica ou gerencial</p>
+            </div>
+            <div class="teoria-box">
+                <h3>📈 Resultados:</h3>
+                <p>Uma das empresas de tecnologia com <span class="destaque">maior satisfação</span> dos funcionários no mundo!</p>
+            </div>
+        </div>
+
+        <!-- Slide 46: Motivação em Tempos de Crise -->
+        <div class="slide">
+            <h2>⚡ MOTIVAÇÃO EM TEMPOS DE CRISE</h2>
+            <div class="teoria-box">
+                <h3>🚨 Desafios Durante Crises:</h3>
+                <ul>
+                    <li><span class="destaque">Incerteza:</span> Medo do futuro</li>
+                    <li><span class="destaque">Estresse:</span> Pressão aumentada</li>
+                    <li><span class="destaque">Recursos limitados:</span> Cortes orçamentários</li>
+                    <li><span class="destaque">Mudanças constantes:</span> Adaptação forçada</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💪 Estratégias de Motivação na Crise:</h3>
+                <ul>
+                    <li><strong>Comunicação transparente</strong> sobre a situação</li>
+                    <li><strong>Foco no propósito</strong> maior da organização</li>
+                    <li><strong>Reconhecimento não-monetário</strong> (flexibilidade, elogios)</li>
+                    <li><strong>Desenvolvimento de habilidades</strong> para o futuro</li>
+                    <li><strong>Apoio emocional</strong> e psicológico</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 47: Mitos sobre Motivação -->
+        <div class="slide">
+            <h2>❌ MITOS SOBRE MOTIVAÇÃO</h2>
+            <div class="teoria-box">
+                <h3>🚫 Mito 1: "Dinheiro é o Único Motivador"</h3>
+                <p><span class="destaque">Realidade:</span> Dinheiro motiva até certo ponto, depois outros fatores se tornam mais importantes.</p>
+            </div>
+            <div class="teoria-box">
+                <h3>🚫 Mito 2: "Posso Motivar Qualquer Pessoa"</h3>
+                <p><span class="destaque">Realidade:</span> Motivação é intrínseca. Você pode criar condições, não motivar diretamente.</p>
+            </div>
+            <div class="teoria-box">
+                <h3>🚫 Mito 3: "Uma Estratégia Funciona para Todos"</h3>
+                <p><span class="destaque">Realidade:</span> Pessoas são diferentes. Estratégias precisam ser personalizadas.</p>
+            </div>
+            <div class="teoria-box">
+                <h3>🚫 Mito 4: "Funcionários Satisfeitos São Produtivos"</h3>
+                <p><span class="destaque">Realidade:</span> Satisfação ≠ Motivação. É possível estar satisfeito mas não motivado.</p>
+            </div>
+        </div>
+
+        <!-- Slide 48: Tendências Futuras -->
+        <div class="slide">
+            <h2>🔮 TENDÊNCIAS FUTURAS EM MOTIVAÇÃO</h2>
+            <div class="exemplo-pratico">
+                <h3>🚀 O Futuro da Motivação no Trabalho:</h3>
+                <p><strong>🤖 IA Personalizada:</strong> Sistemas que adaptam recompensas ao perfil individual</p>
+                <p><strong>🎮 Realidade Virtual:</strong> Treinamentos e experiências imersivas</p>
+                <p><strong>📊 People Analytics:</strong> Dados para prever e prevenir desmotivação</p>
+                <p><strong>💚 Sustentabilidade:</strong> Propósito ambiental e social como motivador</p>
+                <p><strong>🏠 Trabalho Híbrido:</strong> Flexibilidade como principal benefício</p>
+                <p><strong>🧘 Bem-estar Mental:</strong> Saúde mental como prioridade organizacional</p>
+            </div>
+        </div>
+
+        <!-- Slide 49: Plano de Ação Pessoal -->
+        <div class="slide">
+            <h2>📋 SEU PLANO DE AÇÃO PESSOAL</h2>
+            <div class="exemplo-pratico">
+                <h3>🎯 Para Aplicar o que Aprendeu:</h3>
+                <p><strong>1. Autoavaliação:</strong> Identifique suas principais fontes de motivação</p>
+                <p><strong>2. Mapeamento da Equipe:</strong> Entenda o perfil motivacional de cada pessoa</p>
+                <p><strong>3. Estratégias Diferenciadas:</strong> Crie abordagens personalizadas</p>
+                <p><strong>4. Monitoramento:</strong> Estabeleça indicadores para acompanhar</p>
+                <p><strong>5. Ajustes Constantes:</strong> Adapte estratégias conforme resultados</p>
+            </div>
+            <div class="teoria-box">
+                <h3>💡 Reflexão Final:</h3>
+                <p>Que <span class="destaque">uma ação concreta</span> você implementará esta semana para melhorar a motivação em seu ambiente de trabalho?</p>
+            </div>
+        </div>
+
+        <!-- Slide 50: Conclusão -->
+        <div class="slide">
+            <h2>🎓 CONCLUSÃO: TEORIAS MOTIVACIONAIS</h2>
+            <div class="teoria-box">
+                <h3>🔑 Pontos-Chave Aprendidos:</h3>
+                <ul>
+                    <li><span class="destaque">Maslow:</span> Hierarquia de necessidades humanas</li>
+                    <li><span class="destaque">Herzberg:</span> Fatores motivacionais vs higiênicos</li>
+                    <li><span class="destaque">McClelland:</span> Necessidades adquiridas (realização, poder, afiliação)</li>
+                    <li><span class="destaque">Vroom:</span> Expectativa × Instrumentalidade × Valência</li>
+                    <li><span class="destaque">Flow:</span> Equilíbrio entre desafio e habilidade</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🚀 Próximos Passos:</h3>
+                <p><strong>Aplique essas teorias</strong> em situações reais do seu trabalho</p>
+                <p><strong>Observe os resultados</strong> e ajuste as estratégias</p>
+                <p><strong>Continue estudando</strong> sobre comportamento humano</p>
+            </div>
+            <div style="margin-top: 40px;">
+                <h1>🙏 OBRIGADO!</h1>
+                <p><strong>Dúvidas? Vamos discutir!</strong></p>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" onclick="prevSlide()">⬅️ Anterior</button>
+            <button class="nav-btn" onclick="nextSlide()">Próximo ➡️</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Navegação por teclado
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (event.key === 'F' || event.key === 'f') {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                } else {
+                    document.documentElement.requestFullscreen();
+                }
+            }
+        });
+
+        // Navegação por clique
+        document.addEventListener('click', function(event) {
+            const rect = window.innerWidth;
+            if (event.clientX > rect / 2) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        });
+
+        console.log('Teorias Motivacionais carregadas com', totalSlides, 'slides');
+        console.log('✓ Maslow, Herzberg, McClelland, Vroom, Flow');
+        console.log('✓ Exemplos práticos e casos reais');
+        console.log('✓ Navegação: setas, espaço, clique, F para fullscreen');
+    </script>
+</body>
+</html>

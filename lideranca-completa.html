@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liderança, Poder e Autoridade - CO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c1810, #8b4513);
+            color: #ffffff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            padding: 60px 80px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #2c1810, #8b4513);
+            position: relative;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 40px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            margin-bottom: 35px;
+            color: #ff8c00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: #daa520;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        p, li {
+            font-size: 1.8em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        ul {
+            text-align: left;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .lideranca-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .exemplo-pratico {
+            background: rgba(255, 140, 0, 0.2);
+            border-left: 5px solid #ff8c00;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .destaque {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: rgba(255, 140, 0, 0.8);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 140, 0, 1);
+            transform: scale(1.05);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            z-index: 100;
+        }
+
+        .home-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(255, 99, 71, 0.8);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .home-btn:hover {
+            background: rgba(255, 99, 71, 1);
+            transform: scale(1.05);
+        }
+
+        .biografia {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            max-width: 800px;
+        }
+
+        .tipos-lideranca {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            max-width: 1200px;
+        }
+
+        .tipo-lider {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid;
+        }
+
+        .autocratico {
+            border-left-color: #f44336;
+        }
+
+        .democratico {
+            border-left-color: #4caf50;
+        }
+
+        .liberal {
+            border-left-color: #2196f3;
+        }
+
+        .transformacional {
+            border-left-color: #ff9800;
+        }
+
+        .bases-poder {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            max-width: 1000px;
+        }
+
+        .base-poder {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .lider-historico {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .lider-foto {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-right: 30px;
+            background: linear-gradient(45deg, #daa520, #ff8c00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+        }
+
+        .competencias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .competencia {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.4em;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <a href="index.html" class="home-btn">🏠 Início</a>
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">50</span>
+        </div>
+
+        <!-- Slide 1: Título -->
+        <div class="slide active">
+            <h1>👑 LIDERANÇA, PODER E AUTORIDADE</h1>
+            <h2>Comportamento Organizacional</h2>
+            <p class="destaque">Desenvolvendo líderes eficazes para o século XXI</p>
+            <div class="lideranca-box">
+                <p><strong>Objetivos da Aula:</strong></p>
+                <ul>
+                    <li>Compreender os conceitos de liderança, poder e autoridade</li>
+                    <li>Conhecer as principais teorias e estilos de liderança</li>
+                    <li>Identificar bases de poder e sua aplicação</li>
+                    <li>Desenvolver competências de liderança</li>
+                    <li>Analisar casos de líderes históricos e contemporâneos</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 2: Definindo Liderança -->
+        <div class="slide">
+            <h2>🎯 O QUE É LIDERANÇA?</h2>
+            <div class="lideranca-box">
+                <h3>📚 Definição Clássica:</h3>
+                <p><span class="destaque">"Liderança é a capacidade de influenciar um grupo para a realização de uma visão ou conjunto de metas."</span></p>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🔑 Elementos-Chave:</h3>
+                <ul>
+                    <li><span class="destaque">Influência:</span> Capacidade de afetar comportamentos</li>
+                    <li><span class="destaque">Grupo:</span> Trabalho com pessoas</li>
+                    <li><span class="destaque">Visão:</span> Direção clara do futuro</li>
+                    <li><span class="destaque">Metas:</span> Objetivos específicos a alcançar</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: Líder vs Gerente -->
+        <div class="slide">
+            <h2>⚖️ LÍDER vs GERENTE</h2>
+            <div class="tipos-lideranca">
+                <div class="tipo-lider democratico">
+                    <h3>👑 LÍDER</h3>
+                    <ul>
+                        <li><strong>Inspira</strong> pessoas</li>
+                        <li><strong>Cria</strong> mudanças</li>
+                        <li><strong>Foca</strong> no futuro</li>
+                        <li><strong>Desenvolve</strong> visões</li>
+                        <li><strong>Influencia</strong> através do exemplo</li>
+                        <li><strong>Questiona</strong> o status quo</li>
+                    </ul>
+                </div>
+                <div class="tipo-lider autocratico">
+                    <h3>👔 GERENTE</h3>
+                    <ul>
+                        <li><strong>Controla</strong> processos</li>
+                        <li><strong>Mantém</strong> estabilidade</li>
+                        <li><strong>Foca</strong> no presente</li>
+                        <li><strong>Executa</strong> planos</li>
+                        <li><strong>Usa</strong> autoridade formal</li>
+                        <li><strong>Segue</strong> procedimentos</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>💡 Importante:</strong> Nem todos líderes são gerentes, nem todos gerentes são líderes. <span class="destaque">O ideal é ser ambos!</span></p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Poder vs Autoridade -->
+        <div class="slide">
+            <h2>⚡ PODER vs AUTORIDADE</h2>
+            <div class="tipos-lideranca">
+                <div class="tipo-lider transformacional">
+                    <h3>⚡ PODER</h3>
+                    <p><strong>Capacidade de influenciar</strong></p>
+                    <ul>
+                        <li>Pode ser <span class="destaque">formal ou informal</span></li>
+                        <li>Baseado em <span class="destaque">recursos, conhecimento</span></li>
+                        <li>Pode existir <span class="destaque">sem posição hierárquica</span></li>
+                        <li>É <span class="destaque">dinâmico</span> e pode mudar</li>
+                    </ul>
+                </div>
+                <div class="tipo-lider liberal">
+                    <h3>📋 AUTORIDADE</h3>
+                    <p><strong>Poder legitimado</strong></p>
+                    <ul>
+                        <li>Sempre <span class="destaque">formal</span></li>
+                        <li>Baseada em <span class="destaque">posição hierárquica</span></li>
+                        <li>Aceita pela <span class="destaque">organização</span></li>
+                        <li>Mais <span class="destaque">estável</span> no tempo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: As 5 Bases do Poder - French & Raven -->
+        <div class="slide">
+            <h2>🏛️ AS 5 BASES DO PODER</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 French & Raven (1959)</h3>
+                <p>Pesquisadores que identificaram as principais fontes de poder nas organizações</p>
+            </div>
+            <div class="bases-poder">
+                <div class="base-poder" style="border-top: 4px solid #f44336;">
+                    <h4>👑 PODER LEGÍTIMO</h4>
+                    <p>Baseado na <span class="destaque">posição hierárquica</span></p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #ff9800;">
+                    <h4>💰 PODER DE RECOMPENSA</h4>
+                    <p>Capacidade de dar <span class="destaque">recompensas</span></p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #9c27b0;">
+                    <h4>⚠️ PODER COERCITIVO</h4>
+                    <p>Capacidade de <span class="destaque">punir</span></p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #2196f3;">
+                    <h4>🧠 PODER ESPECIALISTA</h4>
+                    <p>Baseado no <span class="destaque">conhecimento</span></p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #4caf50;">
+                    <h4>⭐ PODER REFERENTE</h4>
+                    <p>Baseado no <span class="destaque">carisma</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Poder Legítimo -->
+        <div class="slide">
+            <h2>👑 PODER LEGÍTIMO</h2>
+            <div class="lideranca-box">
+                <h3>📋 Características:</h3>
+                <ul>
+                    <li>Deriva da <span class="destaque">posição oficial</span> na hierarquia</li>
+                    <li>Aceito pela organização e subordinados</li>
+                    <li>Limitado ao <span class="destaque">escopo do cargo</span></li>
+                    <li>Formal e documentado</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💼 Exemplos Práticos:</h3>
+                <p><strong>CEO</strong> que toma decisões estratégicas</p>
+                <p><strong>Gerente</strong> que define metas da equipe</p>
+                <p><strong>Supervisor</strong> que aprova ou rejeita solicitações</p>
+                <p><strong>Coordenador</strong> que aloca recursos e pessoas</p>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>⚠️ Limitação:</strong> Eficaz apenas <span class="destaque">dentro dos limites do cargo</span></p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Poder de Recompensa -->
+        <div class="slide">
+            <h2>💰 PODER DE RECOMPENSA</h2>
+            <div class="lideranca-box">
+                <h3>🎁 Características:</h3>
+                <ul>
+                    <li>Baseado na capacidade de <span class="destaque">oferecer benefícios</span></li>
+                    <li>Motivação através de <span class="destaque">incentivos positivos</span></li>
+                    <li>Eficaz quando as recompensas são <span class="destaque">valorizadas</span></li>
+                    <li>Pode ser tangível ou intangível</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🏆 Tipos de Recompensas:</h3>
+                <p><strong>💰 Tangíveis:</strong> Salário, bônus, promoção, benefícios</p>
+                <p><strong>🏅 Intangíveis:</strong> Reconhecimento, elogio, autonomia, desenvolvimento</p>
+                <p><strong>🎯 Sociais:</strong> Status, prestígio, inclusão em projetos especiais</p>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>💡 Dica:</strong> Conhecer o que <span class="destaque">cada pessoa valoriza</span> é fundamental!</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Poder Coercitivo -->
+        <div class="slide">
+            <h2>⚠️ PODER COERCITIVO</h2>
+            <div class="lideranca-box">
+                <h3>🚨 Características:</h3>
+                <ul>
+                    <li>Baseado no <span class="destaque">medo da punição</span></li>
+                    <li>Compliance por <span class="destaque">evitação</span> de consequências</li>
+                    <li>Eficaz a <span class="destaque">curto prazo</span></li>
+                    <li>Pode gerar <span class="destaque">resistência</span> e ressentimento</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🔨 Formas de Coerção:</h3>
+                <p><strong>⚠️ Formais:</strong> Demissão, suspensão, advertência, redução salarial</p>
+                <p><strong>😠 Informais:</strong> Crítica pública, exclusão social, sobrecarga de trabalho</p>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>⚠️ Cuidado:</strong> Uso excessivo pode causar <span class="destaque">desmotivação, turnover e clima tóxico</span></p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Poder Especialista -->
+        <div class="slide">
+            <h2>🧠 PODER ESPECIALISTA</h2>
+            <div class="lideranca-box">
+                <h3>📚 Características:</h3>
+                <ul>
+                    <li>Baseado em <span class="destaque">conhecimento e expertise</span></li>
+                    <li>Independe da <span class="destaque">posição hierárquica</span></li>
+                    <li>Cresce com a <span class="destaque">complexidade das tarefas</span></li>
+                    <li>Pode ser <span class="destaque">específico de domínio</span></li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💡 Exemplos no Trabalho:</h3>
+                <p><strong>👨‍💻 Especialista em TI</strong> que resolve problemas críticos</p>
+                <p><strong>👩‍⚖️ Advogado</strong> que interpreta regulamentações complexas</p>
+                <p><strong>👨‍🔬 Engenheiro</strong> que domina tecnologia específica</p>
+                <p><strong>👩‍💼 Consultor</strong> com experiência em transformação digital</p>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>🚀 Vantagem:</strong> Poder que <span class="destaque">cresce com o conhecimento</span> e é difícil de contestar</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Poder Referente -->
+        <div class="slide">
+            <h2>⭐ PODER REFERENTE</h2>
+            <div class="lideranca-box">
+                <h3>✨ Características:</h3>
+                <ul>
+                    <li>Baseado em <span class="destaque">carisma e admiração</span></li>
+                    <li>Pessoas querem <span class="destaque">se identificar</span> com o líder</li>
+                    <li>Construído através de <span class="destaque">relacionamentos</span></li>
+                    <li>Mais poderoso quando é <span class="destaque">genuíno</span></li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🌟 Como Desenvolver:</h3>
+                <p><strong>🤝 Integridade:</strong> Ser consistente em palavras e ações</p>
+                <p><strong>💝 Empatia:</strong> Demonstrar interesse genuíno pelas pessoas</p>
+                <p><strong>🎯 Visão inspiradora:</strong> Comunicar propósito claro</p>
+                <p><strong>🏆 Competência:</strong> Demonstrar habilidade e resultados</p>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>🔥 Impacto:</strong> Gera <span class="destaque">engajamento voluntário</span> e lealdade duradoura</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Teorias de Liderança - Evolução -->
+        <div class="slide">
+            <h2>📈 EVOLUÇÃO DAS TEORIAS DE LIDERANÇA</h2>
+            <div class="lideranca-box">
+                <h3>🕰️ Linha do Tempo:</h3>
+                <p><strong>1930-1940:</strong> <span class="destaque">Teoria dos Traços</span> - Líderes nascem prontos</p>
+                <p><strong>1940-1960:</strong> <span class="destaque">Teoria Comportamental</span> - Foco no comportamento</p>
+                <p><strong>1960-1980:</strong> <span class="destaque">Teoria Situacional</span> - Contexto importa</p>
+                <p><strong>1980-hoje:</strong> <span class="destaque">Teorias Modernas</span> - Transformacional, Carismática</p>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>📊 Cada teoria contribui com:</h3>
+                <p>Diferentes <span class="destaque">perspectivas</span> sobre o que faz um líder eficaz</p>
+                <p>Ferramentas práticas para <span class="destaque">desenvolvimento</span> da liderança</p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Teoria dos Traços -->
+        <div class="slide">
+            <h2>🧬 TEORIA DOS TRAÇOS</h2>
+            <div class="biografia">
+                <h3>📚 Premissa Básica (1930-1940):</h3>
+                <p>Líderes possuem <span class="destaque">características inatas</span> que os distinguem dos seguidores</p>
+            </div>
+            <div class="competencias-grid">
+                <div class="competencia" style="background: rgba(244, 67, 54, 0.2);">
+                    <strong>🏋️ FÍSICOS</strong><br>
+                    Energia, Aparência, Estatura
+                </div>
+                <div class="competencia" style="background: rgba(33, 150, 243, 0.2);">
+                    <strong>🧠 INTELECTUAIS</strong><br>
+                    QI, Adaptabilidade, Conhecimento
+                </div>
+                <div class="competencia" style="background: rgba(76, 175, 80, 0.2);">
+                    <strong>👥 SOCIAIS</strong><br>
+                    Cooperação, Habilidades Interpessoais
+                </div>
+                <div class="competencia" style="background: rgba(255, 152, 0, 0.2);">
+                    <strong>🎯 RELACIONADOS À TAREFA</strong><br>
+                    Persistência, Iniciativa, Ambição
+                </div>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>⚠️ Limitação:</strong> Possuir os traços <span class="destaque">não garante</span> ser um líder eficaz</p>
+            </div>
+        </div>
+
+        <!-- Slide 13: Big Five e Liderança -->
+        <div class="slide">
+            <h2>🌟 BIG FIVE E LIDERANÇA</h2>
+            <div class="lideranca-box">
+                <h3>🔬 Os 5 Fatores da Personalidade:</h3>
+            </div>
+            <div class="bases-poder">
+                <div class="base-poder" style="border-top: 4px solid #e91e63;">
+                    <h4>🌈 ABERTURA</h4>
+                    <p>Criatividade, curiosidade, flexibilidade mental</p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #3f51b5;">
+                    <h4>📋 CONSCIENCIOSIDADE</h4>
+                    <p>Disciplina, responsabilidade, persistência</p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #ff9800;">
+                    <h4>👥 EXTROVERSÃO</h4>
+                    <p>Sociabilidade, energia, assertividade</p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #4caf50;">
+                    <h4>🤝 AMABILIDADE</h4>
+                    <p>Cooperação, confiança, empatia</p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #f44336;">
+                    <h4>😰 NEUROTICISMO</h4>
+                    <p>Estabilidade emocional, controle do estresse</p>
+                </div>
+            </div>
+            <div class="exemplo-pratico">
+                <p><strong>🎯 Para Liderança:</strong> <span class="destaque">Extroversão e Conscienciosidade</span> são os preditores mais fortes</p>
+            </div>
+        </div>
+
+        <!-- Slide 14: Teoria Comportamental -->
+        <div class="slide">
+            <h2>🎭 TEORIA COMPORTAMENTAL</h2>
+            <div class="biografia">
+                <h3>📚 Mudança de Foco (1940-1960):</h3>
+                <p>Do <span class="destaque">"quem é o líder"</span> para <span class="destaque">"o que o líder faz"</span></p>
+            </div>
+            <div class="tipos-lideranca">
+                <div class="tipo-lider democratico">
+                    <h3>👥 ORIENTAÇÃO PARA PESSOAS</h3>
+                    <ul>
+                        <li>Preocupação com <span class="destaque">bem-estar</span></li>
+                        <li>Relacionamentos <span class="destaque">interpessoais</span></li>
+                        <li>Desenvolvimento de <span class="destaque">equipes</span></li>
+                        <li>Comunicação <span class="destaque">aberta</span></li>
+                    </ul>
+                </div>
+                <div class="tipo-lider autocratico">
+                    <h3>🎯 ORIENTAÇÃO PARA TAREFA</h3>
+                    <ul>
+                        <li>Foco em <span class="destaque">resultados</span></li>
+                        <li>Estrutura e <span class="destaque">procedimentos</span></li>
+                        <li>Cumprimento de <span class="destaque">prazos</span></li>
+                        <li>Eficiência <span class="destaque">operacional</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>💡 Insight:</strong> Os melhores líderes equilibram <span class="destaque">ambas as orientações</span></p>
+            </div>
+        </div>
+
+        <!-- Slide 15: Grid Gerencial Blake & Mouton -->
+        <div class="slide">
+            <h2>📊 GRID GERENCIAL</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 Blake & Mouton (1964)</h3>
+                <p>Modelo que combina preocupação com <span class="destaque">pessoas e produção</span></p>
+            </div>
+            <div class="lideranca-box" style="padding: 40px;">
+                <div style="background: white; color: black; padding: 30px; border-radius: 15px; position: relative; height: 400px;">
+                    <!-- Eixos -->
+                    <div style="position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); font-weight: bold;">Preocupação com Produção</div>
+                    <div style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-weight: bold;">Preocupação com Pessoas</div>
+                    
+                    <!-- Estilos -->
+                    <div style="position: absolute; top: 20px; left: 20px; background: #f44336; color: white; padding: 10px; border-radius: 5px; font-size: 0.8em;">1,1 Empobrecido</div>
+                    <div style="position: absolute; top: 20px; right: 20px; background: #ff9800; color: white; padding: 10px; border-radius: 5px; font-size: 0.8em;">1,9 Country Club</div>
+                    <div style="position: absolute; bottom: 50px; left: 20px; background: #2196f3; color: white; padding: 10px; border-radius: 5px; font-size: 0.8em;">9,1 Autoridade</div>
+                    <div style="position: absolute; bottom: 50px; right: 20px; background: #4CAF50; color: white; padding: 10px; border-radius: 5px; font-size: 0.8em;">9,9 Equipe</div>
+                    <div style="position: absolute; top: 45%; left: 45%; background: #9c27b0; color: white; padding: 10px; border-radius: 5px; font-size: 0.8em;">5,5 Meio Termo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Estilos de Liderança Clássicos -->
+        <div class="slide">
+            <h2>🎨 ESTILOS CLÁSSICOS DE LIDERANÇA</h2>
+            <div class="tipos-lideranca">
+                <div class="tipo-lider autocratico">
+                    <h3>👑 AUTOCRÁTICO</h3>
+                    <ul>
+                        <li><strong>Centraliza</strong> decisões</li>
+                        <li><strong>Impõe</strong> ordens</li>
+                        <li><strong>Controla</strong> rigorosamente</li>
+                        <li><strong>Supervisiona</strong> de perto</li>
+                    </ul>
+                    <p><strong>Quando usar:</strong> <span class="destaque">Crises, tarefas rotineiras</span></p>
+                </div>
+                <div class="tipo-lider democratico">
+                    <h3>🤝 DEMOCRÁTICO</h3>
+                    <ul>
+                        <li><strong>Envolve</strong> a equipe</li>
+                        <li><strong>Consulta</strong> opiniões</li>
+                        <li><strong>Compartilha</strong> decisões</li>
+                        <li><strong>Encoraja</strong> participação</li>
+                    </ul>
+                    <p><strong>Quando usar:</strong> <span class="destaque">Projetos criativos, equipes experientes</span></p>
+                </div>
+                <div class="tipo-lider liberal">
+                    <h3>🆓 LIBERAL (Laissez-Faire)</h3>
+                    <ul>
+                        <li><strong>Delega</strong> totalmente</li>
+                        <li><strong>Mínima</strong> interferência</li>
+                        <li><strong>Liberdade</strong> total</li>
+                        <li><strong>Sem</strong> controle</li>
+                    </ul>
+                    <p><strong>Quando usar:</strong> <span class="destaque">Equipes altamente qualificadas</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Liderança Situacional - Hersey & Blanchard -->
+        <div class="slide">
+            <h2>🎯 LIDERANÇA SITUACIONAL</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 Hersey & Blanchard</h3>
+                <p>Modelo que adapta o estilo de liderança ao <span class="destaque">nível de maturidade</span> do liderado</p>
+            </div>
+            <div class="tipos-lideranca">
+                <div class="tipo-lider autocratico">
+                    <h3>📋 S1 - DIRETIVO</h3>
+                    <p><strong>Alto Direcionamento</strong><br>
+                    <strong>Baixo Apoio</strong></p>
+                    <p>Para colaboradores com <span class="destaque">baixa competência e baixo comprometimento</span></p>
+                </div>
+                <div class="tipo-lider transformacional">
+                    <h3>🎓 S2 - COACHING</h3>
+                    <p><strong>Alto Direcionamento</strong><br>
+                    <strong>Alto Apoio</strong></p>
+                    <p>Para colaboradores com <span class="destaque">baixa competência e alto comprometimento</span></p>
+                </div>
+                <div class="tipo-lider democratico">
+                    <h3>🤝 S3 - APOIO</h3>
+                    <p><strong>Baixo Direcionamento</strong><br>
+                    <strong>Alto Apoio</strong></p>
+                    <p>Para colaboradores com <span class="destaque">alta competência e baixo comprometimento</span></p>
+                </div>
+                <div class="tipo-lider liberal">
+                    <h3>🆓 S4 - DELEGAÇÃO</h3>
+                    <p><strong>Baixo Direcionamento</strong><br>
+                    <strong>Baixo Apoio</strong></p>
+                    <p>Para colaboradores com <span class="destaque">alta competência e alto comprometimento</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Aplicação da Liderança Situacional -->
+        <div class="slide">
+            <h2>🎯 APLICANDO LIDERANÇA SITUACIONAL</h2>
+            <div class="exemplo-pratico">
+                <h3>👶 FUNCIONÁRIO NOVO (S1 - Diretivo):</h3>
+                <p>"João, você precisa fazer relatório seguindo <span class="destaque">exatamente este modelo</span>. Deadline é sexta às 17h. Me procure se tiver dúvidas."</p>
+                
+                <h3>🎓 EM DESENVOLVIMENTO (S2 - Coaching):</h3>
+                <p>"Maria, o objetivo do relatório é X. Sugiro seguir este roteiro, mas vamos <span class="destaque">discutir juntos</span> as análises."</p>
+                
+                <h3>🤝 EXPERIENTE MAS DESMOTIVADO (S3 - Apoio):</h3>
+                <p>"Carlos, você sabe fazer relatórios melhor que ninguém. <span class="destaque">Como posso ajudar</span> você a se motivar com este projeto?"</p>
+                
+                <h3>🆓 EXPERT MOTIVADO (S4 - Delegação):</h3>
+                <p>"Ana, preciso de um relatório sobre Y até sexta. <span class="destaque">Confio totalmente</span> na sua abordagem."</p>
+            </div>
+        </div>
+
+        <!-- Slide 19: Liderança Transformacional -->
+        <div class="slide">
+            <h2>🚀 LIDERANÇA TRANSFORMACIONAL</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 James MacGregor Burns (1978)</h3>
+                <p>Líderes que <span class="destaque">elevam</span> as aspirações e motivações dos seguidores</p>
+            </div>
+            <div class="competencias-grid">
+                <div class="competencia" style="background: rgba(244, 67, 54, 0.2);">
+                    <strong>✨ CARISMA</strong><br>
+                    Influência idealizada
+                </div>
+                <div class="competencia" style="background: rgba(33, 150, 243, 0.2);">
+                    <strong>🎯 MOTIVAÇÃO INSPIRACIONAL</strong><br>
+                    Visão atrativa do futuro
+                </div>
+                <div class="competencia" style="background: rgba(76, 175, 80, 0.2);">
+                    <strong>🧠 ESTÍMULO INTELECTUAL</strong><br>
+                    Questiona status quo
+                </div>
+                <div class="competencia" style="background: rgba(255, 152, 0, 0.2);">
+                    <strong>💝 CONSIDERAÇÃO INDIVIDUAL</strong><br>
+                    Atenção personalizada
+                </div>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>🎯 Resultado:</strong> Seguidores <span class="destaque">superam</span> expectativas de performance</p>
+            </div>
+        </div>
+
+        <!-- Slide 20: Exemplo Steve Jobs -->
+        <div class="slide">
+            <h2>🍎 EXEMPLO: STEVE JOBS</h2>
+            <div class="lider-historico">
+                <div class="lider-foto">📱</div>
+                <div>
+                    <h3>Steve Jobs (1955-2011)</h3>
+                    <p><strong>Co-fundador da Apple</strong></p>
+                    <p>Exemplo clássico de <span class="destaque">líder transformacional</span> com características carismáticas</p>
+                </div>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🚀 Como Jobs aplicou Liderança Transformacional:</h3>
+                <p><strong>✨ Carisma:</strong> Apresentações icônicas, "Reality Distortion Field"</p>
+                <p><strong>🎯 Visão Inspiracional:</strong> "Think Different", democratizar tecnologia</p>
+                <p><strong>🧠 Estímulo Intelectual:</strong> Questionava constantemente, buscava perfeição</p>
+                <p><strong>💝 Consideração Individual:</strong> Desenvolvimento intensivo de talentos</p>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>📈 Resultado:</strong> Transformou a Apple na <span class="destaque">empresa mais valiosa do mundo</span></p>
+            </div>
+        </div>
+
+        <!-- Slide 21: Liderança Carismática -->
+        <div class="slide">
+            <h2>⭐ LIDERANÇA CARISMÁTICA</h2>
+            <div class="biografia">
+                <h3>🔬 Max Weber</h3>
+                <p><span class="destaque">"Carisma"</span> = Presente do grego, qualidades sobre-humanas ou excepcionais</p>
+            </div>
+            <div class="lideranca-box">
+                <h3>🔑 Características do Líder Carismático:</h3>
+                <ul>
+                    <li><span class="destaque">Autoconfiança extrema</span> em suas habilidades</li>
+                    <li><span class="destaque">Visão clara</span> e atrativa do futuro</li>
+                    <li><span class="destaque">Convicções fortes</span> em suas ideias</li>
+                    <li><span class="destaque">Comportamento não convencional</span></li>
+                    <li><span class="destaque">Sensibilidade ambiental</span> para mudanças</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>⚡ Efeitos nos Seguidores:</h3>
+                <ul>
+                    <li>Identificação forte com o líder</li>
+                    <li>Emulação de valores e comportamentos</li>
+                    <li>Lealdade emocional intensa</li>
+                    <li>Obediência inquestionável</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 22: Carismáticos Nascem ou se Tornam? -->
+        <div class="slide">
+            <h2>🤔 LÍDERES CARISMÁTICOS: NATUREZA vs DESENVOLVIMENTO</h2>
+            <div class="tipos-lideranca">
+                <div class="tipo-lider democratico">
+                    <h3>🧬 NASCEM (Natureza)</h3>
+                    <ul>
+                        <li>Estudos com <span class="destaque">gêmeos idênticos</span></li>
+                        <li>Resultados similares mesmo em <span class="destaque">ambientes diferentes</span></li>
+                        <li>Componente <span class="destaque">genético</span> identificado</li>
+                        <li>Personalidade <span class="destaque">inata</span></li>
+                    </ul>
+                </div>
+                <div class="tipo-lider transformacional">
+                    <h3>🎓 SE TORNAM (Desenvolvimento)</h3>
+                    <ul>
+                        <li><span class="destaque">Treinamento</span> em comunicação</li>
+                        <li>Desenvolvimento de <span class="destaque">visão</span></li>
+                        <li>Práticas de <span class="destaque">storytelling</span></li>
+                        <li>Experiências e <span class="destaque">aprendizado</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>💡 Conclusão:</strong> É <span class="destaque">ambos</span>! Há predisposição natural, mas pode ser desenvolvida</p>
+            </div>
+        </div>
+
+        <!-- Slide 23: Grandes Líderes da História -->
+        <div class="slide">
+            <h2>🏛️ GRANDES LÍDERES DA HISTÓRIA</h2>
+            <div class="lider-historico">
+                <div class="lider-foto">☮️</div>
+                <div>
+                    <h3>Mahatma Gandhi (1869-1948)</h3>
+                    <p>Líder indiano que lutou pela independência através de <span class="destaque">métodos não violentos</span>. Sua liderança pacífica inspirou movimentos de libertação mundial.</p>
+                </div>
+            </div>
+            <div class="lider-historico">
+                <div class="lider-foto">✊</div>
+                <div>
+                    <h3>Nelson Mandela (1918-2013)</h3>
+                    <p>Primeiro presidente negro da África do Sul. Sua <span class="destaque">reconciliação</span> e busca pela verdadeira unidade nacional o tornaram símbolo global de resistência e perdão.</p>
+                </div>
+            </div>
+            <div class="lider-historico">
+                <div class="lider-foto">🚀</div>
+                <div>
+                    <h3>Elon Musk (1971-presente)</h3>
+                    <p>Visionário que revolucionou múltiplas indústrias. Sua <span class="destaque">liderança disruptiva</span> tem impulsionado avanços em veículos elétricos e exploração espacial.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24: Inteligência Emocional na Liderança -->
+        <div class="slide">
+            <h2>❤️🧠 INTELIGÊNCIA EMOCIONAL NA LIDERANÇA</h2>
+            <div class="biografia">
+                <h3>👨‍🔬 Daniel Goleman</h3>
+                <p>Pesquisas mostram que líderes com maior IE são <span class="destaque">mais propensos</span> a emergir como líderes eficazes</p>
+            </div>
+            <div class="bases-poder">
+                <div class="base-poder" style="border-top: 4px solid #e91e63;">
+                    <h4>🎯 AUTOCONSCIÊNCIA</h4>
+                    <p>Conhecer próprias <span class="destaque">emoções e impactos</span></p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #3f51b5;">
+                    <h4>🎛️ AUTORREGULAÇÃO</h4>
+                    <p>Controlar <span class="destaque">impulsos e reações</span></p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #ff9800;">
+                    <h4>🔥 MOTIVAÇÃO</h4>
+                    <p>Energia interna para <span class="destaque">alcançar objetivos</span></p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #4caf50;">
+                    <h4>💝 EMPATIA</h4>
+                    <p>Compreender <span class="destaque">emoções dos outros</span></p>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #9c27b0;">
+                    <h4>🤝 HABILIDADES SOCIAIS</h4>
+                    <p>Gerenciar <span class="destaque">relacionamentos eficazmente</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25: Desenvolvendo IE como Líder -->
+        <div class="slide">
+            <h2>🎯 DESENVOLVENDO INTELIGÊNCIA EMOCIONAL</h2>
+            <div class="exemplo-pratico">
+                <h3>🎯 AUTOCONSCIÊNCIA:</h3>
+                <ul>
+                    <li>Pratique <span class="destaque">mindfulness</span> e autoobservação</li>
+                    <li>Peça <span class="destaque">feedback</span> regular sobre seu comportamento</li>
+                    <li>Mantenha um <span class="destaque">diário emocional</span></li>
+                </ul>
+                
+                <h3>💝 EMPATIA:</h3>
+                <ul>
+                    <li>Escute <span class="destaque">ativamente</span> sem julgar</li>
+                    <li>Faça perguntas para <span class="destaque">entender perspectivas</span></li>
+                    <li>Observe <span class="destaque">linguagem não verbal</span></li>
+                </ul>
+                
+                <h3>🤝 HABILIDADES SOCIAIS:</h3>
+                <ul>
+                    <li>Pratique <span class="destaque">comunicação clara</span> e assertiva</li>
+                    <li>Desenvolva habilidades de <span class="destaque">resolução de conflitos</span></li>
+                    <li>Construa <span class="destaque">networks</span> genuínos</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 26: Liderança e Diversidade -->
+        <div class="slide">
+            <h2>🌍 LIDERANÇA E DIVERSIDADE</h2>
+            <div class="lideranca-box">
+                <h3>🔑 Por que Diversidade é Crucial:</h3>
+                <ul>
+                    <li><span class="destaque">Inovação:</span> Diferentes perspectivas geram soluções criativas</li>
+                    <li><span class="destaque">Melhor tomada de decisão:</span> Reduz vieses cognitivos</li>
+                    <li><span class="destaque">Representatividade:</span> Reflete a sociedade diversa</li>
+                    <li><span class="destaque">Performance:</span> Empresas diversas são mais lucrativas</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🎯 Como Liderar com Diversidade:</h3>
+                <p><strong>🧠 Consciência dos vieses:</strong> Reconhecer preconceitos inconscientes</p>
+                <p><strong>🤝 Inclusão ativa:</strong> Garantir que todos tenham voz</p>
+                <p><strong>🌟 Valorização das diferenças:</strong> Ver diversidade como força</p>
+                <p><strong>📚 Educação contínua:</strong> Aprender sobre diferentes culturas</p>
+            </div>
+        </div>
+
+        <!-- Slide 27: Liderança Digital -->
+        <div class="slide">
+            <h2>💻 LIDERANÇA NA ERA DIGITAL</h2>
+            <div class="lideranca-box">
+                <h3>🚀 Novos Desafios:</h3>
+                <ul>
+                    <li><span class="destaque">Equipes remotas:</span> Liderar à distância</li>
+                    <li><span class="destaque">Velocidade da mudança:</span> Adaptação constante</li>
+                    <li><span class="destaque">Overload de informação:</span> Foco no essencial</li>
+                    <li><span class="destaque">Gerações múltiplas:</span> Diferentes expectativas</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💡 Competências do Líder Digital:</h3>
+                <p><strong>🔄 Agilidade:</strong> Adaptar-se rapidamente às mudanças</p>
+                <p><strong>🤖 Alfabetização digital:</strong> Entender tecnologias emergentes</p>
+                <p><strong>🌐 Pensamento sistêmico:</strong> Ver conexões globais</p>
+                <p><strong>💬 Comunicação virtual:</strong> Conectar através de telas</p>
+                <p><strong>📊 Data-driven:</strong> Decisões baseadas em dados</p>
+            </div>
+        </div>
+
+        <!-- Slide 28: Liderança Remota -->
+        <div class="slide">
+            <h2>🏠 LIDERANÇA DE EQUIPES REMOTAS</h2>
+            <div class="lideranca-box">
+                <h3>🎯 Desafios Únicos:</h3>
+                <ul>
+                    <li><span class="destaque">Falta de interação visual:</span> Perda de sinais não verbais</li>
+                    <li><span class="destaque">Isolamento:</span> Sentimento de desconexão</li>
+                    <li><span class="destaque">Distrações domésticas:</span> Ambiente não controlado</li>
+                    <li><span class="destaque">Fusos horários:</span> Sincronização complexa</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>✅ Estratégias para Liderança Remota:</h3>
+                <p><strong>📹 Reuniões por vídeo regulares:</strong> Manter conexão visual</p>
+                <p><strong>🎯 Metas claras e mensuráveis:</strong> Foco em resultados</p>
+                <p><strong>💬 Comunicação frequente:</strong> Check-ins regulares</p>
+                <p><strong>🎉 Reconhecimento virtual:</strong> Celebrar conquistas online</p>
+                <p><strong>🤝 Construção de confiança:</strong> Autonomia com responsabilidade</p>
+            </div>
+        </div>
+
+        <!-- Slide 29: Comunicação Eficaz na Liderança -->
+        <div class="slide">
+            <h2>📢 COMUNICAÇÃO EFICAZ NA LIDERANÇA</h2>
+            <div class="lideranca-box">
+                <h3>🔑 Elementos da Comunicação do Líder:</h3>
+                <ul>
+                    <li><span class="destaque">Clareza:</span> Mensagem simples e direta</li>
+                    <li><span class="destaque">Consistência:</span> Coerência entre palavras e ações</li>
+                    <li><span class="destaque">Contexto:</span> Adequação ao público e situação</li>
+                    <li><span class="destaque">Feedback:</span> Comunicação de mão dupla</li>
+                </ul>
+            </div>
+            <div class="tipos-lideranca">
+                <div class="tipo-lider democratico">
+                    <h3>🎤 COMUNICAÇÃO VERBAL</h3>
+                    <ul>
+                        <li>Tom de voz apropriado</li>
+                        <li>Vocabulário adequado</li>
+                        <li>Ritmo e pausas</li>
+                        <li>Exemplos e analogias</li>
+                    </ul>
+                </div>
+                <div class="tipo-lider transformacional">
+                    <h3>👁️ COMUNICAÇÃO NÃO VERBAL</h3>
+                    <ul>
+                        <li>Linguagem corporal</li>
+                        <li>Expressões faciais</li>
+                        <li>Postura e gestos</li>
+                        <li>Contato visual</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 30: Storytelling para Líderes -->
+        <div class="slide">
+            <h2>📚 STORYTELLING PARA LÍDERES</h2>
+            <div class="biografia">
+                <h3>🎭 O Poder das Histórias:</h3>
+                <p>Histórias são <span class="destaque">23 vezes mais memoráveis</span> que fatos puros</p>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🎯 Estrutura de uma História Eficaz:</h3>
+                <p><strong>1. 🎬 Contexto:</strong> Onde e quando aconteceu</p>
+                <p><strong>2. ⚡ Conflito:</strong> Qual foi o desafio ou problema</p>
+                <p><strong>3. 🚀 Resolução:</strong> Como foi solucionado</p>
+                <p><strong>4. 💡 Lição:</strong> O que aprendemos com isso</p>
+            </div>
+            <div class="lideranca-box">
+                <h3>📖 Tipos de Histórias para Líderes:</h3>
+                <ul>
+                    <li><span class="destaque">Visão:</span> Para onde estamos indo</li>
+                    <li><span class="destaque">Valores:</span> No que acreditamos</li>
+                    <li><span class="destaque">Mudança:</span> Por que precisamos mudar</li>
+                    <li><span class="destaque">Inspiração:</span> Superar desafios</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 31: Gestão de Conflitos -->
+        <div class="slide">
+            <h2>⚔️ GESTÃO DE CONFLITOS</h2>
+            <div class="lideranca-box">
+                <h3>🔍 Estilos de Gestão de Conflitos:</h3>
+            </div>
+            <div class="bases-poder">
+                <div class="base-poder" style="border-top: 4px solid #f44336;">
+                    <h4>🏃 EVITAÇÃO</h4>
+                    <p>Ignorar ou adiar o conflito</p>
+                    <small>Baixa assertividade, baixa cooperação</small>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #ff9800;">
+                    <h4>🤝 ACOMODAÇÃO</h4>
+                    <p>Ceder às demandas do outro</p>
+                    <small>Baixa assertividade, alta cooperação</small>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #9c27b0;">
+                    <h4>⚔️ COMPETIÇÃO</h4>
+                    <p>Impor sua vontade</p>
+                    <small>Alta assertividade, baixa cooperação</small>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #2196f3;">
+                    <h4>⚖️ COMPROMISSO</h4>
+                    <p>Meio-termo, ambos cedem</p>
+                    <small>Assertividade e cooperação moderadas</small>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #4caf50;">
+                    <h4>🤝 COLABORAÇÃO</h4>
+                    <p>Solução ganha-ganha</p>
+                    <small>Alta assertividade, alta cooperação</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 32: Processo de Resolução de Conflitos -->
+        <div class="slide">
+            <h2>🛠️ PROCESSO DE RESOLUÇÃO DE CONFLITOS</h2>
+            <div class="exemplo-pratico">
+                <h3>📋 Passo a Passo para o Líder:</h3>
+                <p><strong>1. 🔍 IDENTIFICAR:</strong> Reconhecer sinais de conflito</p>
+                <p><strong>2. 👂 ESCUTAR:</strong> Ouvir todas as partes envolvidas</p>
+                <p><strong>3. 🎯 DEFINIR:</strong> Identificar a raiz do problema</p>
+                <p><strong>4. 💡 GERAR OPÇÕES:</strong> Brainstorm de soluções</p>
+                <p><strong>5. ⚖️ AVALIAR:</strong> Análisar prós e contras</p>
+                <p><strong>6. 🤝 ACORDAR:</strong> Definir solução consensual</p>
+                <p><strong>7. 📊 ACOMPANHAR:</strong> Monitorar implementação</p>
+            </div>
+            <div class="lideranca-box">
+                <p><strong>💡 Dica:</strong> Foque no <span class="destaque">problema</span>, não nas pessoas</p>
+            </div>
+        </div>
+
+        <!-- Slide 33: Tomada de Decisão -->
+        <div class="slide">
+            <h2>🎯 TOMADA DE DECISÃO EFICAZ</h2>
+            <div class="lideranca-box">
+                <h3>🧠 Modelos de Decisão:</h3>
+            </div>
+            <div class="tipos-lideranca">
+                <div class="tipo-lider autocratico">
+                    <h3>⚡ DECISÃO RÁPIDA</h3>
+                    <p><strong>Quando usar:</strong> Crises, informações limitadas</p>
+                    <ul>
+                        <li>Baseada em experiência</li>
+                        <li>Intuição do líder</li>
+                        <li>Processo simplificado</li>
+                    </ul>
+                </div>
+                <div class="tipo-lider democratico">
+                    <h3>🔍 DECISÃO ANALÍTICA</h3>
+                    <p><strong>Quando usar:</strong> Decisões importantes, tempo disponível</p>
+                    <ul>
+                        <li>Coleta de dados</li>
+                        <li>Análise sistemática</li>
+                        <li>Múltiplas alternativas</li>
+                    </ul>
+                </div>
+                <div class="tipo-lider transformacional">
+                    <h3>👥 DECISÃO PARTICIPATIVA</h3>
+                    <p><strong>Quando usar:</strong> Impacto em equipe, expertise distribuída</p>
+                    <ul>
+                        <li>Envolvimento da equipe</li>
+                        <li>Consenso ou consulta</li>
+                        <li>Maior comprometimento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 34: Matriz de Decisão -->
+        <div class="slide">
+            <h2>📊 MATRIZ DE DECISÃO</h2>
+            <div class="lideranca-box" style="padding: 40px;">
+                <div style="background: white; color: black; padding: 30px; border-radius: 15px; position: relative; height: 400px;">
+                    <div style="position: absolute; left: 50%; top: 10px; transform: translateX(-50%); font-weight: bold; font-size: 1.2em;">IMPACTO</div>
+                    <div style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-weight: bold; font-size: 1.2em;">URGÊNCIA</div>
+                    
+                    <!-- Quadrantes -->
+                    <div style="position: absolute; top: 15%; left: 15%; width: 30%; height: 30%; background: #f44336; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                        <div style="text-align: center;">
+                            <strong>CRISE</strong><br>
+                            <small>Faça Imediatamente</small>
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; top: 15%; right: 15%; width: 30%; height: 30%; background: #ff9800; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                        <div style="text-align: center;">
+                            <strong>OBJETIVOS</strong><br>
+                            <small>Planeje</small>
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 25%; left: 15%; width: 30%; height: 30%; background: #2196f3; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                        <div style="text-align: center;">
+                            <strong>INTERRUPÇÕES</strong><br>
+                            <small>Delegue</small>
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 25%; right: 15%; width: 30%; height: 30%; background: #4caf50; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                        <div style="text-align: center;">
+                            <strong>DESPERDÍCIO</strong><br>
+                            <small>Elimine</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 35: Delegação Eficaz -->
+        <div class="slide">
+            <h2>🎯 DELEGAÇÃO EFICAZ</h2>
+            <div class="lideranca-box">
+                <h3>🤔 Por que Líderes Não Delegam:</h3>
+                <ul>
+                    <li><span class="destaque">Medo de perder controle:</span> "Só eu sei fazer direito"</li>
+                    <li><span class="destaque">Falta de confiança:</span> "Vai dar errado"</li>
+                    <li><span class="destaque">Perfeccionismo:</span> "Não vai ficar como eu quero"</li>
+                    <li><span class="destaque">Urgência:</span> "É mais rápido fazer eu mesmo"</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>✅ Como Delegar Eficazmente:</h3>
+                <p><strong>1. 🎯 Escolha a pessoa certa:</strong> Habilidades + disponibilidade</p>
+                <p><strong>2. 📋 Seja claro no objetivo:</strong> O que, quando, por que</p>
+                <p><strong>3. 🔧 Forneça recursos:</strong> Ferramentas e autoridade necessárias</p>
+                <p><strong>4. 📊 Estabeleça check-points:</strong> Acompanhamento sem microgerenciamento</p>
+                <p><strong>5. 🎉 Reconheça resultados:</strong> Elogie sucessos, aprenda com erros</p>
+            </div>
+        </div>
+
+        <!-- Slide 36: Desenvolvimento de Equipes -->
+        <div class="slide">
+            <h2>👥 DESENVOLVIMENTO DE EQUIPES</h2>
+            <div class="biografia">
+                <h3>🔄 Estágios de Desenvolvimento (Tuckman):</h3>
+            </div>
+            <div class="competencias-grid">
+                <div class="competencia" style="background: rgba(244, 67, 54, 0.2);">
+                    <strong>🌱 FORMING</strong><br>
+                    Formação - Cortesia e orientação
+                </div>
+                <div class="competencia" style="background: rgba(255, 152, 0, 0.2);">
+                    <strong>⚡ STORMING</strong><br>
+                    Conflito - Tensões e disputas
+                </div>
+                <div class="competencia" style="background: rgba(33, 150, 243, 0.2);">
+                    <strong>🤝 NORMING</strong><br>
+                    Normatização - Regras e coesão
+                </div>
+                <div class="competencia" style="background: rgba(76, 175, 80, 0.2);">
+                    <strong>🚀 PERFORMING</strong><br>
+                    Performance - Alta produtividade
+                </div>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>👑 Papel do Líder em Cada Estágio:</h3>
+                <p><strong>🌱 Forming:</strong> Direção clara, definir papéis</p>
+                <p><strong>⚡ Storming:</strong> Mediar conflitos, manter foco</p>
+                <p><strong>🤝 Norming:</strong> Facilitar colaboração, estabelecer normas</p>
+                <p><strong>🚀 Performing:</strong> Apoiar, reconhecer, desafiar</p>
+            </div>
+        </div>
+
+        <!-- Slide 37: Feedback e Desenvolvimento -->
+        <div class="slide">
+            <h2>📢 FEEDBACK E DESENVOLVIMENTO</h2>
+            <div class="tipos-lideranca">
+                <div class="tipo-lider democratico">
+                    <h3>✅ FEEDBACK POSITIVO</h3>
+                    <ul>
+                        <li><span class="destaque">Específico:</span> "Seu relatório foi claro"</li>
+                        <li><span class="destaque">Oportuno:</span> Logo após a ação</li>
+                        <li><span class="destaque">Público:</span> Quando apropriado</li>
+                        <li><span class="destaque">Focado no comportamento</span></li>
+                    </ul>
+                </div>
+                <div class="tipo-lider transformacional">
+                    <h3>🔄 FEEDBACK DE DESENVOLVIMENTO</h3>
+                    <ul>
+                        <li><span class="destaque">Construtivo:</span> Foco na melhoria</li>
+                        <li><span class="destaque">Privado:</span> Preserva dignidade</li>
+                        <li><span class="destaque">Colaborativo:</span> "Como podemos melhorar?"</li>
+                        <li><span class="destaque">Orientado a soluções</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🎯 Técnica SCI:</h3>
+                <p><strong>📍 SITUAÇÃO:</strong> Contextualize onde/quando</p>
+                <p><strong>🎭 COMPORTAMENTO:</strong> Descreva o que observou</p>
+                <p><strong>💥 IMPACTO:</strong> Explique as consequências</p>
+                <p><em>Exemplo: "Na reunião de ontem (S), quando você interrompeu Maria (C), ela se calou pelo resto da reunião (I)"</em></p>
+            </div>
+        </div>
+
+        <!-- Slide 38: Mentoria e Coaching -->
+        <div class="slide">
+            <h2>🎓 MENTORIA E COACHING</h2>
+            <div class="tipos-lideranca">
+                <div class="tipo-lider democratico">
+                    <h3>👨‍🏫 MENTORIA</h3>
+                    <p><strong>Relacionamento de longo prazo</strong></p>
+                    <ul>
+                        <li>Compartilha <span class="destaque">experiências</span></li>
+                        <li>Orienta sobre <span class="destaque">carreira</span></li>
+                        <li>Transmite <span class="destaque">conhecimento</span></li>
+                        <li>Abre <span class="destaque">network</span></li>
+                    </ul>
+                </div>
+                <div class="tipo-lider transformacional">
+                    <h3>🎯 COACHING</h3>
+                    <p><strong>Processo estruturado de desenvolvimento</strong></p>
+                    <ul>
+                        <li>Foca em <span class="destaque">objetivos específicos</span></li>
+                        <li>Desenvolve <span class="destaque">habilidades</span></li>
+                        <li>Melhora <span class="destaque">performance</span></li>
+                        <li>Processo <span class="destaque">limitado no tempo</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="lideranca-box">
+                <h3>🔧 Modelo GROW para Coaching:</h3>
+                <p><strong>🎯 Goal:</strong> Definir objetivo</p>
+                <p><strong>🔍 Reality:</strong> Avaliar situação atual</p>
+                <p><strong>💡 Options:</strong> Explorar alternativas</p>
+                <p><strong>🚀 Will:</strong> Plano de ação</p>
+            </div>
+        </div>
+
+        <!-- Slide 39: Liderança Ética -->
+        <div class="slide">
+            <h2>⚖️ LIDERANÇA ÉTICA</h2>
+            <div class="lideranca-box">
+                <h3>🔑 Princípios da Liderança Ética:</h3>
+                <ul>
+                    <li><span class="destaque">Integridade:</span> Consistência entre valores e ações</li>
+                    <li><span class="destaque">Transparência:</span> Comunicação honesta e aberta</li>
+                    <li><span class="destaque">Responsabilidade:</span> Assumir consequências das decisões</li>
+                    <li><span class="destaque">Justiça:</span> Tratamento equitativo para todos</li>
+                    <li><span class="destaque">Respeito:</span> Valorizar a dignidade humana</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🤔 Testes Éticos para Decisões:</h3>
+                <p><strong>🔍 Teste da Publicidade:</strong> "Me sentiria confortável se isso fosse público?"</p>
+                <p><strong>👪 Teste da Família:</strong> "Explicaria isso para meus filhos?"</p>
+                <p><strong>⚖️ Teste da Reversibilidade:</strong> "Gostaria que fizessem isso comigo?"</p>
+                <p><strong>💤 Teste do Travesseiro:</strong> "Dormiria tranquilo após essa decisão?"</p>
+            </div>
+        </div>
+
+        <!-- Slide 40: Liderança Sustentável -->
+        <div class="slide">
+            <h2>🌱 LIDERANÇA SUSTENTÁVEL</h2>
+            <div class="lideranca-box">
+                <h3>🌍 Triple Bottom Line:</h3>
+            </div>
+            <div class="bases-poder">
+                <div class="base-poder" style="border-top: 4px solid #4caf50;">
+                    <h4>🌱 PLANETA</h4>
+                    <p>Responsabilidade <span class="destaque">ambiental</span></p>
+                    <small>Reduzir impacto ecológico</small>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #2196f3;">
+                    <h4>👥 PESSOAS</h4>
+                    <p>Responsabilidade <span class="destaque">social</span></p>
+                    <small>Bem-estar da comunidade</small>
+                </div>
+                <div class="base-poder" style="border-top: 4px solid #ff9800;">
+                    <h4>💰 LUCRO</h4>
+                    <p>Responsabilidade <span class="destaque">econômica</span></p>
+                    <small>Viabilidade financeira</small>
+                </div>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🎯 Como Praticar:</h3>
+                <p><strong>🌱 Decisões com impacto ambiental:</strong> Considerar pegada ecológica</p>
+                <p><strong>👥 Responsabilidade social:</strong> Contribuir para comunidade</p>
+                <p><strong>⚖️ Equilíbrio stakeholders:</strong> Não focar apenas nos acionistas</p>
+            </div>
+        </div>
+
+        <!-- Slide 41: Liderança em Tempos de Crise -->
+        <div class="slide">
+            <h2>⚡ LIDERANÇA EM TEMPOS DE CRISE</h2>
+            <div class="lideranca-box">
+                <h3>🚨 Características da Liderança de Crise:</h3>
+                <ul>
+                    <li><span class="destaque">Comunicação transparente:</span> Honestidade sobre a situação</li>
+                    <li><span class="destaque">Decisões rápidas:</span> Agilidade sem paralisia</li>
+                    <li><span class="destaque">Foco nas pessoas:</span> Bem-estar da equipe em primeiro lugar</li>
+                    <li><span class="destaque">Visão de longo prazo:</span> Além da crise imediata</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>📋 Protocolo de Liderança de Crise:</h3>
+                <p><strong>1. 🔍 AVALIAR:</strong> Dimensionar rapidamente a situação</p>
+                <p><strong>2. 📢 COMUNICAR:</strong> Informar stakeholders imediatamente</p>
+                <p><strong>3. 🎯 PRIORIZAR:</strong> Focar no essencial</p>
+                <p><strong>4. 🤝 MOBILIZAR:</strong> Engajar equipe na solução</p>
+                <p><strong>5. 📊 MONITORAR:</strong> Acompanhar evolução constantemente</p>
+                <p><strong>6. 📚 APRENDER:</strong> Extrair lições para o futuro</p>
+            </div>
+        </div>
+
+        <!-- Slide 42: Autodesenvolvimento da Liderança -->
+        <div class="slide">
+            <h2>🚀 AUTODESENVOLVIMENTO DA LIDERANÇA</h2>
+            <div class="exemplo-pratico">
+                <h3>📚 Áreas de Desenvolvimento:</h3>
+                <p><strong>🧠 AUTOCONHECIMENTO:</strong></p>
+                <ul>
+                    <li>Assessments de personalidade (DISC, MBTI)</li>
+                    <li>Feedback 360 graus</li>
+                    <li>Journaling e reflexão</li>
+                </ul>
+                
+                <p><strong>🎯 HABILIDADES TÉCNICAS:</strong></p>
+                <ul>
+                    <li>Cursos de liderança</li>
+                    <li>MBA ou especializações</li>
+                    <li>Certificações específicas</li>
+                </ul>
+                
+                <p><strong>🤝 HABILIDADES SOCIAIS:</strong></p>
+                <ul>
+                    <li>Prática de comunicação</li>
+                    <li>Participação em grupos</li>
+                    <li>Network profissional</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 43: Plano de Desenvolvimento Pessoal -->
+        <div class="slide">
+            <h2>📋 PLANO DE DESENVOLVIMENTO PESSOAL</h2>
+            <div class="exemplo-pratico">
+                <h3>🎯 Estrutura do PDP:</h3>
+                <p><strong>1. 🔍 AUTOAVALIAÇÃO:</strong></p>
+                <ul>
+                    <li>Forças e fraquezas atuais</li>
+                    <li>Feedback de outros</li>
+                    <li>Gaps de competência</li>
+                </ul>
+                
+                <p><strong>2. 🎯 OBJETIVOS:</strong></p>
+                <ul>
+                    <li>Onde quero chegar?</li>
+                    <li>Metas SMART</li>
+                    <li>Timeline definido</li>
+                </ul>
+                
+                <p><strong>3. 🛠️ AÇÕES:</strong></p>
+                <ul>
+                    <li>Cursos e treinamentos</li>
+                    <li>Experiências práticas</li>
+                    <li>Mentoria e coaching</li>
+                </ul>
+                
+                <p><strong>4. 📊 MENSURAÇÃO:</strong></p>
+                <ul>
+                    <li>Indicadores de progresso</li>
+                    <li>Reviews regulares</li>
+                    <li>Ajustes necessários</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 44: Ferramentas de Liderança -->
+        <div class="slide">
+            <h2>🛠️ FERRAMENTAS PRÁTICAS DE LIDERANÇA</h2>
+            <div class="competencias-grid">
+                <div class="competencia" style="background: rgba(244, 67, 54, 0.2);">
+                    <strong>📊 CANVAS DE LIDERANÇA</strong><br>
+                    Mapeamento visual do estilo
+                </div>
+                <div class="competencia" style="background: rgba(33, 150, 243, 0.2);">
+                    <strong>🎯 OKRs</strong><br>
+                    Objectives & Key Results
+                </div>
+                <div class="competencia" style="background: rgba(76, 175, 80, 0.2);">
+                    <strong>📋 ONE-ON-ONES</strong><br>
+                    Reuniões individuais regulares
+                </div>
+                <div class="competencia" style="background: rgba(255, 152, 0, 0.2);">
+                    <strong>🔄 RETROSPECTIVAS</strong><br>
+                    Aprendizado contínuo da equipe
+                </div>
+                <div class="competencia" style="background: rgba(156, 39, 176, 0.2);">
+                    <strong>📈 DASHBOARD</strong><br>
+                    Acompanhamento de métricas
+                </div>
+                <div class="competencia" style="background: rgba(0, 150, 136, 0.2);">
+                    <strong>🎭 ROLE PLAYING</strong><br>
+                    Simulação de situações
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 45: Liderança do Futuro -->
+        <div class="slide">
+            <h2>🔮 LIDERANÇA DO FUTURO</h2>
+            <div class="lideranca-box">
+                <h3>🚀 Tendências Emergentes:</h3>
+                <ul>
+                    <li><span class="destaque">Liderança Distribuída:</span> Poder compartilhado em rede</li>
+                    <li><span class="destaque">Agilidade Adaptativa:</span> Mudança constante como norma</li>
+                    <li><span class="destaque">Purpose-Driven:</span> Propósito como centro da liderança</li>
+                    <li><span class="destaque">Human-Centric:</span> Foco na experiência humana</li>
+                    <li><span class="destaque">Eco-Leadership:</span> Consciência sistêmica global</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🎯 Competências do Líder 4.0:</h3>
+                <p><strong>🤖 Digital Fluency:</strong> Conforto com tecnologias emergentes</p>
+                <p><strong>🧠 Pensamento Sistêmico:</strong> Ver conexões complexas</p>
+                <p><strong>💝 Inteligência Cultural:</strong> Liderar diversidade global</p>
+                <p><strong>🔄 Aprendizado Contínuo:</strong> Never stop learning</p>
+                <p><strong>🌱 Sustentabilidade:</strong> Responsabilidade intergeracional</p>
+            </div>
+        </div>
+
+        <!-- Slide 46: Exemplo de Líder Contemporâneo -->
+        <div class="slide">
+            <h2>🌟 EXEMPLO: JACINDA ARDERN</h2>
+            <div class="lider-historico">
+                <div class="lider-foto">🇳🇿</div>
+                <div>
+                    <h3>Jacinda Ardern (1980-presente)</h3>
+                    <p><strong>Ex-Primeira Ministra da Nova Zelândia</strong></p>
+                    <p>Exemplo de <span class="destaque">liderança empática</span> e comunicação autêntica</p>
+                </div>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🎯 Características de Sua Liderança:</h3>
+                <p><strong>💝 Empatia em Ação:</strong> Liderou com compaixão durante crises (Christchurch, COVID-19)</p>
+                <p><strong>📢 Comunicação Autêntica:</strong> Mensagens claras e humanas</p>
+                <p><strong>⚡ Decisões Rápidas:</strong> Lockdown precoce na pandemia</p>
+                <p><strong>🌍 Visão Global:</strong> Nova Zelândia como exemplo mundial</p>
+                <p><strong>⚖️ Equilíbrio:</strong> Força e gentileza simultaneamente</p>
+            </div>
+        </div>
+
+        <!-- Slide 47: Avaliação de Liderança -->
+        <div class="slide">
+            <h2>📊 AVALIANDO SUA LIDERANÇA</h2>
+            <div class="exemplo-pratico">
+                <h3>🔍 Perguntas para Reflexão:</h3>
+                <p><strong>🎯 IMPACTO:</strong> Que diferença estou fazendo?</p>
+                <p><strong>👥 PESSOAS:</strong> Minha equipe está crescendo?</p>
+                <p><strong>📈 RESULTADOS:</strong> Estamos alcançando nossos objetivos?</p>
+                <p><strong>🔄 APRENDIZADO:</strong> O que aprendi com os erros?</p>
+                <p><strong>🌟 LEGADO:</strong> Como querem ser lembrado?</p>
+            </div>
+            <div class="lideranca-box">
+                <h3>📋 Indicadores de Liderança Eficaz:</h3>
+                <ul>
+                    <li>🚀 <span class="destaque">Engajamento da equipe</span> em alta</li>
+                    <li>📈 <span class="destaque">Performance consistente</span> ou crescente</li>
+                    <li>🎓 <span class="destaque">Desenvolvimento de pessoas</span> sendo sucessores</li>
+                    <li>🤝 <span class="destaque">Confiança e respeito</span> dos pares</li>
+                    <li>🎯 <span class="destaque">Visão clara</span> e comunicada</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 48: Ação e Implementação -->
+        <div class="slide">
+            <h2>🚀 PLANO DE AÇÃO</h2>
+            <div class="exemplo-pratico">
+                <h3>📋 Para Implementar Hoje:</h3>
+                <p><strong>⚡ AÇÃO IMEDIATA (Esta semana):</strong></p>
+                <ul>
+                    <li>Agende um one-on-one com cada membro da equipe</li>
+                    <li>Identifique seu estilo de liderança predominante</li>
+                    <li>Peça feedback sobre sua liderança</li>
+                </ul>
+                
+                <p><strong>📅 PRAZO MÉDIO (Este mês):</strong></p>
+                <ul>
+                    <li>Crie seu Plano de Desenvolvimento Pessoal</li>
+                    <li>Estabeleça metas claras para a equipe</li>
+                    <li>Implemente rituais de feedback regular</li>
+                </ul>
+                
+                <p><strong>🎯 LONGO PRAZO (Este trimestre):</strong></p>
+                <ul>
+                    <li>Desenvolva sucessores na equipe</li>
+                    <li>Busque mentor ou coach</li>
+                    <li>Avalie e ajuste seu estilo conforme situações</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 49: Reflexão Final -->
+        <div class="slide">
+            <h2>💭 REFLEXÃO FINAL</h2>
+            <div class="lideranca-box">
+                <h3>🎯 Perguntas Poderosas:</h3>
+                <p><strong>1. 🌟 Que tipo de líder eu quero ser?</strong></p>
+                <p><strong>2. 💝 Como posso servir melhor minha equipe?</strong></p>
+                <p><strong>3. 🚀 Que legado quero deixar como líder?</strong></p>
+                <p><strong>4. 📈 Como vou medir meu sucesso como líder?</strong></p>
+                <p><strong>5. 🔄 Como vou continuar me desenvolvendo?</strong></p>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>💡 Lembre-se:</h3>
+                <p><span class="destaque">"Liderança não é sobre estar no controle. É sobre cuidar daqueles em seu controle."</span> - Simon Sinek</p>
+                <p>A verdadeira liderança é <span class="destaque">influência positiva</span> que transforma pessoas e organizações</p>
+            </div>
+        </div>
+
+        <!-- Slide 50: Conclusão -->
+        <div class="slide">
+            <h2>🎓 CONCLUSÃO: LIDERANÇA, PODER E AUTORIDADE</h2>
+            <div class="lideranca-box">
+                <h3>🔑 Pontos-Chave Aprendidos:</h3>
+                <ul>
+                    <li><span class="destaque">5 Bases do Poder:</span> Legítimo, Recompensa, Coercitivo, Especialista, Referente</li>
+                    <li><span class="destaque">Teorias de Liderança:</span> Traços, Comportamental, Situacional, Transformacional</li>
+                    <li><span class="destaque">Estilos de Liderança:</span> Autocrático, Democrático, Liberal, Situacional</li>
+                    <li><span class="destaque">Competências do Líder:</span> IE, Comunicação, Feedback, Desenvolvimento</li>
+                    <li><span class="destaque">Liderança do Futuro:</span> Digital, Sustentável, Ética, Humana</li>
+                </ul>
+            </div>
+            <div class="exemplo-pratico">
+                <h3>🚀 Próximos Passos:</h3>
+                <p><strong>Aplique os conceitos</strong> no seu dia a dia</p>
+                <p><strong>Desenvolva-se continuamente</strong> como líder</p>
+                <p><strong>Inspire outros</strong> a se tornarem líderes</p>
+            </div>
+            <div style="margin-top: 40px;">
+                <h1>🙏 OBRIGADO!</h1>
+                <p><strong>Vamos juntos construir líderes extraordinários!</strong></p>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" onclick="prevSlide()">⬅️ Anterior</button>
+            <button class="nav-btn" onclick="nextSlide()">Próximo ➡️</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Navegação por teclado
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (event.key === 'F' || event.key === 'f') {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                } else {
+                    document.documentElement.requestFullscreen();
+                }
+            }
+        });
+
+        // Navegação por clique
+        document.addEventListener('click', function(event) {
+            const rect = window.innerWidth;
+            if (event.clientX > rect / 2) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        });
+
+        console.log('Liderança, Poder e Autoridade carregadas com', totalSlides, 'slides');
+        console.log('✓ 5 Bases do Poder, Teorias de Liderança, Estilos');
+        console.log('✓ Exemplos históricos e contemporâneos');
+        console.log('✓ Ferramentas práticas e desenvolvimento');
+        console.log('✓ Navegação: setas, espaço, clique, F para fullscreen');
+    </script>
+</body>
+</html>
