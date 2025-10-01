@@ -31,16 +31,18 @@
             width: 100%;
             height: 100vh;
             padding: 60px 80px;
-            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             position: relative;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
         }
 
         .slide.active {
-            display: flex;
+            display: flex !important;
+            opacity: 1;
         }
 
         h1 {
@@ -195,6 +197,33 @@
             background: linear-gradient(135deg, #1a365d, #2c5282);
             color: white;
             border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            user-select: none;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, #2c5282, #3182ce);
+        }
+
+        .nav-button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #1a365d, #2c5282);
+            color: white;
+            border: none;
             padding: 12px 24px;
             border-radius: 6px;
             font-size: 1.1em;
@@ -317,7 +346,7 @@
     <div class="presentation-container">
         <a href="index.html" class="home-btn">🏠 Início</a>
         <div class="slide-counter">
-            <span id="current-slide">1</span> / <span id="total-slides">60</span>
+            <span id="current-slide">1</span> / <span id="total-slides">45</span>
         </div>
 
         <!-- Slide 1: Título -->
@@ -345,6 +374,13 @@
                 <div style="margin-top: 25px; padding: 15px; background: rgba(0, 212, 255, 0.1); border-radius: 6px; color: #1a365d;">
                     <p style="font-size: 1.4em;"><strong>📚 Conteúdo:</strong> Maslow • Comunicação • Feedback • Barreiras • Ética</p>
                 </div>
+            </div>
+            
+            <!-- Indicador de Navegação -->
+            <div style="position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%); color: #ffffff; text-align: center; font-size: 1.2em; opacity: 0.8;">
+                <p style="margin-bottom: 10px;">🎮 <strong>COMO NAVEGAR:</strong></p>
+                <p>⌨️ Setas do teclado • 🖱️ Clique na tela • 🔘 Botões abaixo</p>
+                <p style="margin-top: 10px; font-size: 1em; opacity: 0.7;">45 slides de conteúdo para sua aprovação!</p>
             </div>
         </div>
 
@@ -1322,17 +1358,59 @@
     </div>
 
     <script>
+        // Variáveis globais
         let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
+        let slides = [];
+        let totalSlides = 0;
 
-        document.getElementById('total-slides').textContent = totalSlides;
+        // Inicialização quando DOM carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSlideshow();
+        });
+
+        function initializeSlideshow() {
+            slides = document.querySelectorAll('.slide');
+            totalSlides = slides.length;
+            
+            // Atualizar contador
+            const totalSlidesElement = document.getElementById('total-slides');
+            if (totalSlidesElement) {
+                totalSlidesElement.textContent = totalSlides;
+            }
+            
+            // Garantir que primeiro slide está ativo
+            if (slides.length > 0) {
+                slides[0].classList.add('active');
+                updateSlideCounter();
+            }
+            
+            console.log(`✅ Slideshow inicializado: ${totalSlides} slides`);
+        }
 
         function showSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (n + totalSlides) % totalSlides;
-            slides[currentSlide].classList.add('active');
-            document.getElementById('current-slide').textContent = currentSlide + 1;
+            if (slides.length === 0) return;
+            
+            // Remove classe active do slide atual
+            if (slides[currentSlide]) {
+                slides[currentSlide].classList.remove('active');
+            }
+            
+            // Calcula novo slide (com wrap around)
+            currentSlide = ((n % totalSlides) + totalSlides) % totalSlides;
+            
+            // Adiciona classe active ao novo slide
+            if (slides[currentSlide]) {
+                slides[currentSlide].classList.add('active');
+            }
+            
+            updateSlideCounter();
+        }
+
+        function updateSlideCounter() {
+            const currentSlideElement = document.getElementById('current-slide');
+            if (currentSlideElement) {
+                currentSlideElement.textContent = currentSlide + 1;
+            }
         }
 
         function nextSlide() {
@@ -1345,62 +1423,84 @@
 
         // Navegação por teclado
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                e.preventDefault();
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                previousSlide();
-            } else if (e.key === 'Home') {
-                e.preventDefault();
-                showSlide(0);
-            } else if (e.key === 'End') {
-                e.preventDefault();
-                showSlide(totalSlides - 1);
+            switch(e.key) {
+                case 'ArrowRight':
+                case ' ':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    previousSlide();
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    showSlide(0);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    showSlide(totalSlides - 1);
+                    break;
             }
         });
 
-        // Navegação por clique
+        // Navegação por clique na tela
         document.addEventListener('click', function(e) {
-            if (e.target.closest('.nav-button') || e.target.closest('.home-btn')) {
+            // Não navegar se clicou em botões ou elementos interativos
+            if (e.target.closest('.nav-button') || 
+                e.target.closest('.home-btn') || 
+                e.target.closest('.quiz-option') ||
+                e.target.closest('a') ||
+                e.target.closest('button')) {
                 return;
             }
             
-            const rect = document.body.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const width = rect.width;
+            const rect = window.innerWidth;
+            const clickX = e.clientX;
             
-            if (x > width / 2) {
+            // Clique na metade direita = próximo slide
+            if (clickX > rect / 2) {
                 nextSlide();
             } else {
+                // Clique na metade esquerda = slide anterior
                 previousSlide();
             }
         });
 
         // Efeitos nas opções do quiz
-        document.querySelectorAll('.quiz-option').forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove seleção anterior
-                document.querySelectorAll('.quiz-option').forEach(opt => {
-                    opt.style.background = 'rgba(255,255,255,0.1)';
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Evita navegação ao clicar no quiz
+                    
+                    // Remove seleção anterior
+                    const allOptions = this.closest('.quiz-container').querySelectorAll('.quiz-option');
+                    allOptions.forEach(opt => {
+                        opt.style.background = '';
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Destaca a opção selecionada
+                    this.classList.add('selected');
+                    this.style.background = 'rgba(0, 212, 255, 0.3)';
+                    
+                    // Se for a resposta correta, mostra feedback
+                    if (this.classList.contains('correct')) {
+                        setTimeout(() => {
+                            this.style.background = 'linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(22, 163, 74, 0.2))';
+                        }, 1000);
+                    }
                 });
-                
-                // Destaca a opção selecionada
-                this.style.background = 'rgba(79, 195, 247, 0.3)';
-                
-                // Se for a resposta correta, mostra feedback
-                if (this.classList.contains('correct')) {
-                    setTimeout(() => {
-                        this.style.background = 'linear-gradient(135deg, rgba(76, 175, 80, 0.4), rgba(102, 187, 106, 0.3))';
-                    }, 500);
-                }
             });
         });
 
+        // Log de inicialização
         console.log('📚 Revisão SM1 - Comportamento Organizacional');
-        console.log('✅ 45 slides carregados com sucesso!');
-        console.log('🎯 Material baseado nas provas oficiais SM1');
-        console.log('🎮 Use setas do teclado ou clique para navegar');
+        console.log('🎯 Sistema de navegação carregado');
+        console.log('🎮 Navegação: Setas do teclado, botões ou clique na tela');
+        console.log('🖱️ Clique esquerda da tela = slide anterior');
+        console.log('🖱️ Clique direita da tela = próximo slide');
     </script>
 </body>
 </html>
